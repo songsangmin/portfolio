@@ -22,12 +22,9 @@ jobs:
       - run: |
           cd build/web
           git init
-           # 3. change your email
           git config --global user.email qjsrotkdals@gmail.com
-          # 4. change your name
           git config --global user.name songsangmin
           git status
-          # 5. change your repository
           git remote add origin https://$@github.com/songsangmin/portfolio.git
           git checkout -b gh-pages
           git add --all
