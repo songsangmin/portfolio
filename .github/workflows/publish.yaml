@@ -17,13 +17,17 @@ jobs:
       - run: flutter config --enable-web
       - run: flutter pub get
       - run: flutter build web --release
+        # 1. change path which exist lib/main.dart
         #working-directory: ./portfolio
-      - run:
+      - run: |
           cd portfolio/build/web
           git init
-          git config --global qjsrotkdals@gmail.com
+           # 3. change your email
+          git config --global user.email qjsrotkdals@gmail.com
+          # 4. change your name
           git config --global user.name 송상민
           git status
+          # 5. change your repository
           git remote add origin https://$@github.com/songsangmin/PortFolio.git
           git checkout -b gh-pages
           git add --all
