@@ -20,7 +20,7 @@ jobs:
         # 1. change path which exist lib/main.dart
         #working-directory: ./portfolio
       - run: |
-          cd portfolio/build/web
+          cd build/web
           git init
            # 3. change your email
           git config --global user.email qjsrotkdals@gmail.com
