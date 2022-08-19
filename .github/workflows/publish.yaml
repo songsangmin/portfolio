@@ -28,7 +28,7 @@ jobs:
           git config --global user.name 송상민
           git status
           # 5. change your repository
-          git remote add origin https://$@github.com/songsangmin/PortFolio.git
+          git remote add origin https://github.com/songsangmin/portfolio.git
           git checkout -b gh-pages
           git add --all
           git commit -m "update"
