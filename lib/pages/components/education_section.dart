@@ -11,7 +11,7 @@ final List<Education> educationList = [
   Education(
     description:
     "명언 어플(하움)에 대하여 개발부터 유지 보수까지 혼자서 진행하고 유지하고 있습니다. \nGetx, Provider를 통한 상태 관리에 능숙하며, 출시된 Flutter 3.0에 대한 "
-        "이해를 위해 공식문서, 공식 유튜브, 자료들을 통하여 지속적인 공부를 진행하고 있습니다.",
+        "이해를 위해 공식문서, 공식 유튜브, 자료들을 통하여 지속적인 공부를 진행하고 있습니다.\nJava, Swift를 이용하여 앱위젯, 홈위젯 관리가 가능합니다.",
     linkName: "https://flutter-ko.dev/",
     period: "Flutter",
     imagePath: "assets/flutter.png",

@@ -5,6 +5,7 @@ import 'package:portfolio/utils/globals.dart';
 import 'package:portfolio/widgets/horizontal_divide.dart';
 import '../../utils/constants.dart';
 import '../../widgets/image_with_animated_opacity.dart';
+import 'dart:html' as html;
 
 class Project extends StatelessWidget{
 
@@ -200,7 +201,7 @@ class ProjectDetail extends StatelessWidget{
                 ),
                 child: TextButton(
                   onPressed: () {
-
+                    html.window.open("https://play.google.com/store/apps/details?id=com.ha.woom&hl=ko&gl=US","_blank");
                   },
                   child: Center(
                     child: Text(
@@ -229,7 +230,7 @@ class ProjectDetail extends StatelessWidget{
                 padding: EdgeInsets.symmetric(horizontal: 28.0),
                 child: TextButton(
                   onPressed: () {
-
+                    html.window.open("https://apps.apple.com/kr/app/%ED%95%98%EC%9B%80/id1503624763","_blank");
                   },
                   child: Center(
                     child: Text(

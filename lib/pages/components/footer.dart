@@ -5,26 +5,27 @@ import 'package:responsive_framework/responsive_framework.dart';
 import 'package:portfolio/models/footer_item.dart';
 import 'package:portfolio/utils/constants.dart';
 import 'package:portfolio/utils/screen_helper.dart';
+import 'dart:html' as html;
 
 final List<FooterItem> footerItems = [
   FooterItem(
     iconPath: "assets/github2.png",
     title: "GitHub",
-    text1: "www.github.com/songsang12",
-    text2: "www.github.com/songsang97",
+    text1: "https://www.github.com/songsangmin",
+    text2: "",
   ),
   FooterItem(
     iconPath: "assets/blog.png",
     title: "Blog",
-    text1: "www.velog.com/songgoori",
+    text1: "https://velog.io/@songoori",
     text2: "",
   ),
-  FooterItem(
-    iconPath: "assets/email.jpg",
-    title: "EMAIL",
-    text1: "qjsrotkdals@naver.com",
-    text2: "qjsrotkdals@gmail.com",
-  ),
+  // FooterItem(
+  //   iconPath: "assets/email.jpg",
+  //   title: "EMAIL",
+  //   text1: "qjsrotkdals@naver.com",
+  //   text2: "qjsrotkdals@gmail.com",
+  // ),
 ];
 
 class Footer extends StatelessWidget {
@@ -72,7 +73,8 @@ Widget _buildUi(double width, BuildContext context) {
                               children: [
                                 Image.asset(
                                   footerItem.iconPath,
-                                  width: 40.0,
+                                  width: 30.0,
+                                  fit: BoxFit.cover,
                                 ),
                                 SizedBox(
                                   width: 15.0,
@@ -90,29 +92,39 @@ Widget _buildUi(double width, BuildContext context) {
                             ),
                             SizedBox(
                               height: 15.0,
-                            ),
-                            RichText(
-                              textAlign: TextAlign.start,
-                              text: TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: "${footerItem.text1}\n",
-                                    style: TextStyle(
-                                      fontFamily: "Jalnan",
-                                      color: kCaptionColor,
-                                      height: 1.8,
+                            ),Row(
+                              children: [
+                                Text("Check ", style: TextStyle(
+                                 fontSize: 15,
+                                 fontFamily: "Museum",
+                                 fontWeight: FontWeight.w300,
+                                 color: Colors.black,
+                                ),),
+                                MouseRegion(
+                                  cursor: SystemMouseCursors.click,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      html.window.open(footerItem.text1,"_blank");
+                                    },
+                                    child: Text(
+                                      "${footerItem.title}️",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: "Museum",
+                                        fontSize: 20,
+                                      ),
                                     ),
                                   ),
-                                  TextSpan(
-                                    text: "${footerItem.text2}\n",
-                                    style: TextStyle(
-                                      fontFamily: "Jalnan",
-                                      color: kCaptionColor,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            )
+                                ),
+                                Text(" ✔", style: TextStyle(
+                                  fontSize: 17,
+                                  fontFamily: "Museum",
+                                  fontWeight: FontWeight.w300,
+                                  color: Colors.black,
+                                ),),
+                              ],
+                            ),
                           ],
                         ),
                       ),

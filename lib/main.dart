@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: '송상민 Flutter PortFolio',
+      title: '송상민 PortFolio',
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.dark,
       darkTheme: Theme.of(context).copyWith(platform: TargetPlatform.android,
