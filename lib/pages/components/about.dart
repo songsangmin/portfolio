@@ -8,6 +8,7 @@ import 'package:portfolio/models/about_model.dart';
 import 'package:portfolio/utils/constants.dart';
 import 'package:portfolio/utils/screen_helper.dart';
 
+//자기소개 Item
 final List<AboutModel> abouts = [
   AboutModel(title: "송상민 / SangMin Song", period: "1997.12.05 / 경기도 안산시" ,detail: "qjsrotkdals@naver.com\nqjsrotkdals@gmail.com", period2: "", detail2: ""),
   AboutModel(title: "Education", period: "2013.03-2016.02",detail: "성포고등학교", period2: "2016.03-2022.02", detail2: "한신대학교 컴퓨터공학\n" ),
@@ -30,12 +31,13 @@ class About extends StatelessWidget {
     );
   }
 
+  //About UI
   Widget _buildUi(double width, BuildContext context) {
     return Container(
       alignment: Alignment.center,
       child: Column(
         children: [
-          Text("About",
+          Text("About", // About Title
             style: TextStyle(
               fontFamily: "Museum",
               fontWeight: FontWeight.w900,
@@ -59,8 +61,6 @@ class About extends StatelessWidget {
                         border: Border(left: BorderSide(width: 2))
                       ),
                       child: Wrap(
-                        //spacing: 20.0,
-                        //runSpacing: 20.0,
                         children: abouts
                             .map(
                               (about) => Container(
@@ -74,11 +74,11 @@ class About extends StatelessWidget {
                                 SizedBox(
                                   height: 15,
                                 ),
-                                HorizontalDivide(color: Colors.black87,space: 3,indent: 40, endIndent: 40,),
+                                HorizontalDivide(color: Colors.black87,space: 3,indent: 40, endIndent: 40,), //가로줄 적용
                                 SizedBox(
                                   height: 15,
                                 ),
-                                Text(
+                                Text( //Item Title
                                   about.title,
                                   style: TextStyle(
                                     fontSize: 32,
@@ -93,7 +93,7 @@ class About extends StatelessWidget {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(
+                                    Text( //Item 기간
                                       about.period,
                                       style: TextStyle(
                                         fontFamily: "Museum",

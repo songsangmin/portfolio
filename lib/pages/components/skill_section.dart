@@ -9,7 +9,7 @@ import 'package:portfolio/utils/globals.dart';
 List<Skill> skills = [
   Skill(
     skill: "Dart",
-    percentage: 65,
+    percentage: 70,
   ),
   Skill(
     skill: "Java",

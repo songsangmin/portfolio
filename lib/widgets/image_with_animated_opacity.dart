@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// Image 변경 위젯
 class ImageWithAnimatedOpacity extends StatelessWidget {
   const ImageWithAnimatedOpacity({
     Key? key,

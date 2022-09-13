@@ -7,6 +7,7 @@ import '../../utils/constants.dart';
 import '../../widgets/image_with_animated_opacity.dart';
 import 'dart:html' as html;
 
+// 프로젝트 전체
 class Project extends StatelessWidget{
 
   Project({required this.project});
@@ -81,6 +82,7 @@ class Project extends StatelessWidget{
   }
 }
 
+//프로젝트 이미지 Part
 class ProjectImage extends StatelessWidget {
 
   ProjectImage({ required this.project});
@@ -99,7 +101,7 @@ class ProjectImage extends StatelessWidget {
                       child: Container(
                         clipBehavior: Clip.hardEdge,
                         decoration: BoxDecoration(),
-                        child: ImageWithAnimatedOpacity(
+                        child: ImageWithAnimatedOpacity( // Image 변경 위젯
                           image: AssetImage(image),
                           fit: BoxFit.cover,
                         ),
@@ -107,7 +109,7 @@ class ProjectImage extends StatelessWidget {
                     );
                   },
                 ),).toList(),
-        options: CarouselOptions(
+        options: CarouselOptions( // 변경 기본 설정
           aspectRatio: 16 / 12,
           autoPlay: true,
           autoPlayInterval: Duration(seconds: 5),
@@ -116,6 +118,7 @@ class ProjectImage extends StatelessWidget {
   }
 }
 
+//프로젝트 설명 파트
 class ProjectDetail extends StatelessWidget{
  ProjectDetail({required this.project});
 
@@ -201,7 +204,7 @@ class ProjectDetail extends StatelessWidget{
                 ),
                 child: TextButton(
                   onPressed: () {
-                    html.window.open("https://play.google.com/store/apps/details?id=com.ha.woom&hl=ko&gl=US","_blank");
+                    html.window.open("https://play.google.com/store/apps/details?id=com.ha.woom&hl=ko&gl=US","_blank"); // Haum 안드로이드 페이지 이동
                   },
                   child: Center(
                     child: Text(
@@ -230,7 +233,7 @@ class ProjectDetail extends StatelessWidget{
                 padding: EdgeInsets.symmetric(horizontal: 28.0),
                 child: TextButton(
                   onPressed: () {
-                    html.window.open("https://apps.apple.com/kr/app/%ED%95%98%EC%9B%80/id1503624763","_blank");
+                    html.window.open("https://apps.apple.com/kr/app/%ED%95%98%EC%9B%80/id1503624763","_blank"); // 하움 IOS 페이지 이동
                   },
                   child: Center(
                     child: Text(

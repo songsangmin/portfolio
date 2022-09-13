@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
       builder: (context, widget) => ResponsiveWrapper.builder(
           ClampingScrollWrapper.builder(context, widget!),
           defaultScale: true,
-          breakpoints: [
+          breakpoints: [// 반응 한계치 설정
             ResponsiveBreakpoint.resize(450, name: MOBILE),
             ResponsiveBreakpoint.resize(800, name: TABLET),
             ResponsiveBreakpoint.resize(1000, name: TABLET),
@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
       home: Home(),
       initialBinding: BindingsBuilder(
           (){
-            Get.put(ProjectController(currentIndex: 0));
+            Get.put(ProjectController(currentIndex: 0)); // Get 초기 설정
           }
       ),
     );

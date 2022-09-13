@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// 가로줄 사용 위한 위젯
 class HorizontalDivide extends StatelessWidget {
   const HorizontalDivide({
     Key? key,

@@ -8,8 +8,6 @@ import 'package:portfolio/pages/components/header.dart';
 import 'package:portfolio/pages/components/project_items.dart';
 import 'package:portfolio/pages/components/about.dart';
 import 'package:portfolio/pages/components/skill_section.dart';
-import 'package:portfolio/pages/components/sponsors.dart';
-import 'package:portfolio/pages/components/testimonial_widget.dart';
 import 'package:portfolio/pages/components/career.dart';
 import 'package:portfolio/utils/constants.dart';
 import 'package:portfolio/utils/globals.dart';
@@ -75,18 +73,18 @@ class Home extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              child: Header(), //Header 구성
+              child: Header(), //Header 구성, 상단 고정
             ),
             Expanded(
-              child: SingleChildScrollView(
+              child: SingleChildScrollView( // 스크롤 가능 Part
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Carousel(), //소개글 구성
+                    Carousel(), // 소개글 회전,
                     SizedBox(
                       height: 75.0,
                     ),
-                    About(),
+                    About(), // 나에 관한 소개
                     SizedBox(
                       height: 120.0,
                     ),
@@ -94,15 +92,15 @@ class Home extends StatelessWidget {
                     SizedBox(
                       height: 10.0,
                     ),
-                    EducationSection(),
+                    EducationSection(), // Stack 별 나의 수준 소개.
                     SizedBox(
                       height: 75.0,
                     ),
-                    ProjectItem(),
+                    ProjectItem(), // Project 소개
                     SizedBox(
                       height: 75.0,
                     ),
-                    Career(),
+                    Career(), // 이력
                     // Padding(
                     //   padding: const EdgeInsets.symmetric(vertical: 28.0),
                     //   child: PortfolioStats(),
@@ -119,7 +117,7 @@ class Home extends StatelessWidget {
                     //   height: 50.0,
                     // ),
                     // TestimonialWidget(),
-                    Footer(),
+                    Footer(), // 하단 구성
                   ],
                 ),
               ),

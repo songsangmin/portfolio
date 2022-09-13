@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//세로줄 사용을 위한 위젯
 class VerticalDivide extends StatelessWidget {
   const VerticalDivide({
     Key? key,

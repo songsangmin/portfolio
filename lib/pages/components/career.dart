@@ -11,12 +11,13 @@ import 'package:timelines/timelines.dart';
 import '../../models/app_model.dart';
 import '../../utils/globals.dart';
 
+//이력서 Item
 final List<CareerItem> careerItem = [
   CareerItem(
     company: '트라콤',
     period: '2021.09-2021.12',
     position: '웹 개발자 (인턴)',
-    works: <App>[
+    works: <App>[ //works
       App(
       name: "",
       detail: "",
