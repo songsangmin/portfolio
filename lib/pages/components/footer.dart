@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:portfolio/models/footer_item.dart';
 import 'package:portfolio/utils/constants.dart';
@@ -20,12 +19,6 @@ final List<FooterItem> footerItems = [
     text1: "https://velog.io/@songoori",
     text2: "",
   ),
-  // FooterItem(
-  //   iconPath: "assets/email.jpg",
-  //   title: "EMAIL",
-  //   text1: "qjsrotkdals@naver.com",
-  //   text2: "qjsrotkdals@gmail.com",
-  // ),
 ];
 
 class Footer extends StatelessWidget {

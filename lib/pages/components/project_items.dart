@@ -1,11 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/controller/project_controller.dart';
 import 'package:portfolio/pages/components/project.dart';
-import 'package:portfolio/utils/constants.dart';
 import 'package:portfolio/utils/screen_helper.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 import 'package:portfolio/models/project_model.dart';
 import 'package:get/get.dart';
 

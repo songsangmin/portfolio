@@ -1,9 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/models/project_model.dart';
-import 'package:portfolio/utils/globals.dart';
 import 'package:portfolio/widgets/horizontal_divide.dart';
-import '../../utils/constants.dart';
 import '../../widgets/image_with_animated_opacity.dart';
 import 'dart:html' as html;
 
@@ -253,5 +251,4 @@ class ProjectDetail extends StatelessWidget{
       ],
     );
   }
-
 }

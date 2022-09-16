@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:portfolio/models/skill.dart';
 import 'package:portfolio/utils/constants.dart';
@@ -139,8 +138,7 @@ class SkillSection extends StatelessWidget {
                               ],
                             ),
                           ),
-                        )
-                            .toList(),
+                        ).toList(),
                       )
                     ],
                   ),
