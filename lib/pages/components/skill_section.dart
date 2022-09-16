@@ -6,6 +6,7 @@ import 'package:portfolio/utils/constants.dart';
 import 'package:portfolio/utils/screen_helper.dart';
 import 'package:portfolio/utils/globals.dart';
 
+//todo 언제든지 실력이 늘면 바꿀 수 있도록
 List<Skill> skills = [
   Skill(
     skill: "Dart",

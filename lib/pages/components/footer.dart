@@ -93,7 +93,7 @@ Widget _buildUi(double width, BuildContext context) {
                             SizedBox(
                               height: 15.0,
                             ),Row(
-                              children: [
+                              children: [ //Todo 나중에 디자인 이쁘게 바꿔보기
                                 Text("Check ", style: TextStyle(
                                  fontSize: 15,
                                  fontFamily: "Museum",

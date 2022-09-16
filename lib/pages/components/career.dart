@@ -53,7 +53,7 @@ class Career extends StatelessWidget {
             minWidth: width,
             defaultScale: false,
             child: Column(
-              children: [
+              children: [ //최상단 제목
                 Text(
                   "Career",
                   style: TextStyle(
@@ -64,19 +64,19 @@ class Career extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 50,),
-                FixedTimeline.tileBuilder(
+                FixedTimeline.tileBuilder( //타임라인위젯
                   theme: TimelineThemeData(
                     nodePosition: ScreenHelper.isMobile(context) ? 0.0 : 0.5,
                     color: Colors.black,
-                    indicatorTheme: IndicatorThemeData(
+                    indicatorTheme: IndicatorThemeData( //노드 테마
                       position: 0,
                       size: 30.0,
                     ),
-                    connectorTheme: ConnectorThemeData(
+                    connectorTheme: ConnectorThemeData( //연결선 테마
                       thickness: 4,
                     ),
                   ),
-                  builder: TimelineTileBuilder.connected(
+                  builder: TimelineTileBuilder.connected( //아이템 개수만큼 노드 늘리기
                     contentsAlign: ScreenHelper.isMobile(context)
                         ? ContentsAlign.basic
                         : ContentsAlign.alternating,
@@ -90,7 +90,7 @@ class Career extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
-                          if(ScreenHelper.isDesktop(context))
+                          if(ScreenHelper.isDesktop(context)) //데스크탑 일시 회사와 기간 설정
                             Row(
                               children: [
                                 Text(
@@ -165,7 +165,7 @@ class Career extends StatelessWidget {
                       );
                     },
                     indicatorBuilder: (_, int index){
-                      return OutlinedDotIndicator(
+                      return OutlinedDotIndicator( //점 바깥선 테두리 두께
                         borderWidth: 4,
                       );
                     },

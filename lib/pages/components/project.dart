@@ -91,7 +91,7 @@ class ProjectImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CarouselSlider(
+    return CarouselSlider( // 프로젝트가 한개에서 멈추지 않을 것이기에 슬라이드쇼로 구현
         items: project.images
             .map(
                 (String image) => Builder(

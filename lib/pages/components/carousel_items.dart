@@ -14,7 +14,7 @@ List<CarouselItemModel> carouselItems = List.generate(
               mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
-              children: [
+              children: [ // 왼쪽 소개 파트
                 Text("Flutter 개발자",
                 style: TextStyle(
                   fontFamily: 'Jalnan',
@@ -125,7 +125,7 @@ List<CarouselItemModel> carouselItems = List.generate(
               ],
             ),
           ),
-          image: Container(
+          image: Container( //오른쪽 이미지 파트
            child: Image.asset(
              "assets/me.png",
              fit: BoxFit.contain,

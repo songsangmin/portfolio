@@ -24,7 +24,7 @@ final List<ProjectModel> projectItem = [
       function: "글귀 저장, 글귀 보관함, 하움 알림, 위젯, 글귀 모음, 글귀 캘린더",
       techStack: "Flutter, Firebase, Swift, Java")
 ];
-
+//프로젝트 상세 설명 및 이미지
 class ProjectItem extends GetView<PageController>{
   @override
   Widget build(BuildContext context) {
