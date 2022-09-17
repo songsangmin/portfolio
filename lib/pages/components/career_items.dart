@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:line_icons/line_icons.dart';
 import '../../models/app_model.dart';
 
 class CareerSection extends StatelessWidget {

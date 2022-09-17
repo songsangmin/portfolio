@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:portfolio/models/education.dart';
 import 'package:portfolio/utils/constants.dart';
@@ -62,33 +61,6 @@ class EducationSection extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Text(
-            //   "EDUCATION",
-            //   style: TextStyle(
-            //     fontFamily: "Museum",
-            //     color: Colors.white,
-            //     fontWeight: FontWeight.w900,
-            //     fontSize: 30.0,
-            //     height: 1.3,
-            //   ),
-            // ),
-            // SizedBox(
-            //   height: 5.0,
-            // ),
-            // Wrap(
-            //   children: [
-            //     Container(
-            //       constraints: BoxConstraints(maxWidth: 400.0),
-            //       child: Text(
-            //         "A full stack all round developer that does all the job he needs to do at all times. Actually this is a false statement",
-            //         style: TextStyle(
-            //           color: Colors.white,
-            //           height: 1.5,
-            //         ),
-            //       ),
-            //     ),
-            //   ],
-            // ),
             SizedBox(
               height: 40.0,
             ),
@@ -105,14 +77,6 @@ class EducationSection extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            // Text(
-                            //   education.period,
-                            //   style: GoogleFonts.oswald(
-                            //     color: Colors.white,
-                            //     fontWeight: FontWeight.w900,
-                            //     fontSize: 30.0,
-                            //   ),
-                            // ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [

@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/pages/home.dart';
 import 'package:portfolio/utils/constants.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-
 import 'controller/project_controller.dart';
 
 void main() {

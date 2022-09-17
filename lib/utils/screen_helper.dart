@@ -8,9 +8,7 @@ class ScreenHelper extends StatelessWidget{
   ScreenHelper({Key? key, required this.desktop, required this.mobile, required this.tablet}) : super(key: key);
 
   static bool isMobile(BuildContext context) => MediaQuery.of(context).size.width < 800.0;
-
   static bool isTablet( BuildContext context) => MediaQuery.of(context).size.width >= 800.0 && MediaQuery.of(context).size.width < 1200.0;
-
   static bool isDesktop(BuildContext context) => MediaQuery.of(context).size.width >= 1200.0;
 
   @override

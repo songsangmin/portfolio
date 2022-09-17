@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:portfolio/pages/components/carousel.dart';
-import 'package:portfolio/pages/components/cv_section.dart';
 import 'package:portfolio/pages/components/education_section.dart';
 import 'package:portfolio/pages/components/footer.dart';
 import 'package:portfolio/pages/components/header.dart';
@@ -11,8 +10,6 @@ import 'package:portfolio/pages/components/skill_section.dart';
 import 'package:portfolio/pages/components/career.dart';
 import 'package:portfolio/utils/constants.dart';
 import 'package:portfolio/utils/globals.dart';
-
-import 'components/project.dart';
 
 class Home extends StatelessWidget {
   @override

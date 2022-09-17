@@ -1,8 +1,6 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/models/design_process.dart';
-import 'package:portfolio/utils/constants.dart';
 import 'package:portfolio/utils/screen_helper.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'dart:html' as html;
@@ -65,20 +63,6 @@ class CvSection extends StatelessWidget{
                     fontSize: 18.0,
                   ),
                 ),
-                // GestureDetector(
-                //   onTap: (){},
-                //   child: MouseRegion(
-                //     cursor: SystemMouseCursors.click,
-                //     child: Text(
-                //       "Download File",
-                //       style: GoogleFonts.oswald(
-                //         color: kPrimaryColor,
-                //         fontWeight: FontWeight.w900,
-                //         fontSize: 16.0,
-                //       ),
-                //     ),
-                //   ),
-                // ),
               ],
             ),
             SizedBox(

@@ -1,9 +1,6 @@
-import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/utils/constants.dart';
-
 import '../../models/carousel_item_model.dart';
 import 'package:flutter/material.dart';
-
 import '../../utils/globals.dart';
 
 List<CarouselItemModel> carouselItems = List.generate(

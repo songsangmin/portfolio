@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/models/career_item.dart';
 import 'package:portfolio/pages/components/career_items.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
-import 'package:portfolio/utils/constants.dart';
 import 'package:portfolio/utils/screen_helper.dart';
 import 'package:timelines/timelines.dart';
-
 import '../../models/app_model.dart';
 import '../../utils/globals.dart';
 

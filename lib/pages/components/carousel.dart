@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/pages/components/carousel_items.dart';
 import 'package:portfolio/utils/screen_helper.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-
 import '../../utils/globals.dart';
 
 class Carousel extends StatelessWidget {
