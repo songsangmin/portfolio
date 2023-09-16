@@ -9,24 +9,36 @@ import 'package:portfolio/utils/globals.dart';
 List<Skill> skills = [
   Skill(
     skill: "Dart",
-    percentage: 70,
+    percentage: 85,
   ),
   Skill(
     skill: "Java",
-    percentage: 40,
+    percentage: 60,
   ),
   Skill(
     skill: "Swift",
-    percentage: 35,
+    percentage: 40,
   ),
   Skill(
-    skill: "MariaDB",
-    percentage: 70,
+    skill: "MariaDB, MYSQL, MSSQL",
+    percentage: 85,
   ),
   Skill(
     skill: "Firebase",
+    percentage: 70,
+  ),
+  Skill(
+    skill: "react-native",
     percentage: 60,
   ),
+  Skill(
+    skill: "PHP",
+    percentage: 55,
+  ),
+  Skill(
+    skill: "JAVASCRIPT",
+    percentage: 70,
+  )
 ];
 
 class SkillSection extends StatelessWidget {
