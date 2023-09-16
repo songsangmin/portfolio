@@ -144,9 +144,54 @@ class About extends StatelessWidget {
                                   height: 20.0,
                                 ),
                                 //HorizontalDivide(color: Colors.black45,space: 3,),
+                                Text(
+                                  about.period3,
+                                  style: TextStyle(
+                                    fontFamily: "Museum",
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                Text(
+                                  about.detail3,
+                                  maxLines: 8,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                      color: Colors.black54,
+                                      fontFamily: "Jalnan",
+                                      fontSize: 20,
+                                      height: 1.5,
+                                      fontWeight: FontWeight.w600
+                                  ),
+                                ),
                                 SizedBox(
                                   height: 20.0,
-                                )
+                                ),
+                                Text(
+                                  about.period4,
+                                  style: TextStyle(
+                                    fontFamily: "Museum",
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                Text(
+                                  about.detail4,
+                                  maxLines: 8,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                      color: Colors.black54,
+                                      fontFamily: "Jalnan",
+                                      fontSize: 20,
+                                      height: 1.5,
+                                      fontWeight: FontWeight.w600
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 20.0,
+                                ),
                               ],
                             ),
                           ),
