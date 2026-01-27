@@ -14,39 +14,41 @@ final List<CareerItem> careerItem = [
     company: '트라콤',
     period: '2021.09-2021.12',
     position: '웹 개발자 (인턴)',
-    works: <App>[ //works
+    works: <App>[
       App(
-      name: "",
-      detail: "",
-      works: [
-      '통계 페이지 설계 및 개발',
-      '단위 테스트 및 통합 테스트 진행',
-      '오류 수정 및 안정화등의 유지보수',
+        name: "",
+        detail: "",
+        works: [
+          '통계 페이지 설계 및 개발',
+          '단위 테스트 및 통합 테스트 진행',
+          '오류 수정 및 안정화등의 유지보수',
         ],
       ),
-      CareerItem(
+    ],
+  ),
+  CareerItem(
     company: '기독교복음방송 GOODTV',
     period: '2023.11.01 ~',
     position: '앱 개발자',
-    works: <App>[ //works
+    works: <App>[
       App(
-      name: "녹톡(KNOCKTALK)",
-      detail: "Flutter, ASP Classic",
-      works: [
-        '앱 유지보수 및 기능개발',
+        name: "녹톡(KNOCKTALK)",
+        detail: "Flutter, ASP Classic",
+        works: [
+          '앱 유지보수 및 기능개발',
         ],
       ),
-       App(
-      name: "GOODTV",
-      detail: "Flutter, ASP Classic",
-      works: [
-        '앱 유지보수 및 기능개발',
+      App(
+        name: "GOODTV",
+        detail: "Flutter, ASP Classic",
+        works: [
+          '앱 유지보수 및 기능개발',
         ],
       ),
-       App(
-      name: "바이블 애플",
-      detail: "React Native, ASP Classic",
-      works: [
+      App(
+        name: "바이블 애플",
+        detail: "React Native, ASP Classic",
+        works: [
           '앱 유지보수 및 기능개발',
           '프로젝트 관리 및 협업',
           '데이터 분석 및 보고서 작성',
@@ -54,9 +56,9 @@ final List<CareerItem> careerItem = [
         ],
       ),
       App(
-      name: "포휴",
-      detail: "React Native, PHP",
-      works: [
+        name: "포휴",
+        detail: "React Native, PHP",
+        works: [
           '앱 유지보수 및 기능개발',
           '프로젝트 관리 및 협업',
           '데이터 분석 및 보고서 작성',

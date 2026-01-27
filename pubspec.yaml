@@ -24,13 +24,13 @@ dependencies:
   flutter:
     sdk: flutter
   google_fonts: ^3.0.1
-  responsive_framework:
-  smooth_page_indicator:
+  responsive_framework: ^0.1.9
+  smooth_page_indicator: ^1.0.0+2
   carousel_slider: ^4.1.1
   url_launcher: ^6.1.5
   get: ^4.6.5
   timelines: ^0.1.0
-  line_icons:
+  line_icons: ^2.0.1
 
 
 
