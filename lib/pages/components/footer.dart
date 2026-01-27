@@ -4,7 +4,7 @@ import 'package:responsive_framework/responsive_framework.dart';
 import 'package:portfolio/models/footer_item.dart';
 import 'package:portfolio/utils/constants.dart';
 import 'package:portfolio/utils/screen_helper.dart';
-import 'dart:html' as html;
+import 'package:url_launcher/url_launcher.dart';
 
 final List<FooterItem> footerItems = [
   FooterItem(
@@ -96,8 +96,11 @@ Widget _buildUi(double width, BuildContext context) {
                                 MouseRegion(
                                   cursor: SystemMouseCursors.click,
                                   child: GestureDetector(
-                                    onTap: () {
-                                      html.window.open(footerItem.text1,"_blank");
+                                    onTap: () async {
+                                      final uri = Uri.parse(footerItem.text1);
+                                      if (await canLaunchUrl(uri)) {
+                                        await launchUrl(uri, mode: LaunchMode.externalApplication);
+                                      }
                                     },
                                     child: Text(
                                       "${footerItem.title}️",

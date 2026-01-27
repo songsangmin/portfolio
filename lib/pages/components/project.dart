@@ -2,8 +2,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/models/project_model.dart';
 import 'package:portfolio/widgets/horizontal_divide.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../widgets/image_with_animated_opacity.dart';
-import 'dart:html' as html;
 
 // 프로젝트 전체
 class Project extends StatelessWidget{
@@ -201,8 +201,11 @@ class ProjectDetail extends StatelessWidget{
                   horizontal: 28.0,
                 ),
                 child: TextButton(
-                  onPressed: () {
-                    html.window.open("https://play.google.com/store/apps/details?id=com.ha.woom&hl=ko&gl=US","_blank"); // Haum 안드로이드 페이지 이동
+                  onPressed: () async {
+                    final uri = Uri.parse("https://play.google.com/store/apps/details?id=com.ha.woom&hl=ko&gl=US");
+                    if (await canLaunchUrl(uri)) {
+                      await launchUrl(uri, mode: LaunchMode.externalApplication);
+                    }
                   },
                   child: Center(
                     child: Text(
@@ -230,8 +233,11 @@ class ProjectDetail extends StatelessWidget{
                 height: 48.0,
                 padding: EdgeInsets.symmetric(horizontal: 28.0),
                 child: TextButton(
-                  onPressed: () {
-                    html.window.open("https://apps.apple.com/kr/app/%ED%95%98%EC%9B%80/id1503624763","_blank"); // 하움 IOS 페이지 이동
+                  onPressed: () async {
+                    final uri = Uri.parse("https://apps.apple.com/kr/app/%ED%95%98%EC%9B%80/id1503624763");
+                    if (await canLaunchUrl(uri)) {
+                      await launchUrl(uri, mode: LaunchMode.externalApplication);
+                    }
                   },
                   child: Center(
                     child: Text(

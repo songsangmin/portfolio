@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/models/design_process.dart';
 import 'package:portfolio/utils/screen_helper.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-import 'dart:html' as html;
+import 'package:url_launcher/url_launcher.dart';
 
 final List<DesignProcess> designProcesses = [
   DesignProcess(
@@ -112,8 +112,11 @@ class CvSection extends StatelessWidget{
                                   height: 30.0,
                                 ),
                                 GestureDetector(
-                                  onTap: () async{
-                                    html.window.open(designProcesses[index].subTitle,"_blank");
+                                  onTap: () async {
+                                    final uri = Uri.parse(designProcesses[index].subTitle);
+                                    if (await canLaunchUrl(uri)) {
+                                      await launchUrl(uri, mode: LaunchMode.externalApplication);
+                                    }
                                   },
                                   child: MouseRegion(
                                     cursor: SystemMouseCursors.click,

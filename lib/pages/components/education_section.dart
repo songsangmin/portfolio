@@ -4,7 +4,7 @@ import 'package:responsive_framework/responsive_framework.dart';
 import 'package:portfolio/models/education.dart';
 import 'package:portfolio/utils/constants.dart';
 import 'package:portfolio/utils/screen_helper.dart';
-import 'dart:html' as html;
+import 'package:url_launcher/url_launcher.dart';
 
 final List<Education> educationList = [
   Education(
@@ -119,8 +119,11 @@ class EducationSection extends StatelessWidget {
                             MouseRegion(
                               cursor: SystemMouseCursors.click,
                               child: GestureDetector(
-                                onTap: () {
-                                  html.window.open(education.linkName,"_blank");
+                                onTap: () async {
+                                  final uri = Uri.parse(education.linkName);
+                                  if (await canLaunchUrl(uri)) {
+                                    await launchUrl(uri, mode: LaunchMode.externalApplication);
+                                  }
                                 },
                                 child: Text(
                                   "Go ${education.period} Main Site ->",

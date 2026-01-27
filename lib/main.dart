@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       title: '송상민 PortFolio',
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.dark,
-      darkTheme: Theme.of(context).copyWith(platform: TargetPlatform.android,
+      darkTheme: Theme.of(context).copyWith(
       scaffoldBackgroundColor: kWhiteColor,
       primaryColor: kPrimaryColor,
       canvasColor: kWhiteColor,

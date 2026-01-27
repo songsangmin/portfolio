@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/utils/constants.dart';
 import 'package:portfolio/utils/screen_helper.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-import 'dart:html' as html;
+import 'package:url_launcher/url_launcher.dart';
 import '../../models/header_item.dart';
 import '../../utils/globals.dart';
 
@@ -74,7 +74,12 @@ class HeaderLogo extends StatelessWidget {
                 cursor: SystemMouseCursors.click,
                 child: GestureDetector(
                   onTap: () {
-                    html.window.location.reload();
+                    // 웹에서 페이지 새로고침은 JavaScript를 통해 처리
+                    // Flutter 웹에서는 Navigator를 사용하여 홈으로 이동
+                    Scrollable.ensureVisible(
+                      Globals.homeKey.currentContext!,
+                      duration: Duration(seconds: 1),
+                    );
                   },
                   child: RichText(
                     textAlign: TextAlign.center,
