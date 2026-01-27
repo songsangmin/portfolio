@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/controller/project_controller.dart';
 import 'package:portfolio/pages/components/project.dart';
@@ -25,7 +26,7 @@ final List<ProjectModel> projectItem = [
 class ProjectItem extends GetView<PageController>{
   @override
   Widget build(BuildContext context) {
-    CarouselController carouselController = CarouselController();
+    final CarouselController carouselController = CarouselController();
     final Size screenSize = MediaQuery.of(context).size;
     final hPadding = ScreenHelper.isDesktop(context) ? screenSize.width / 7
         : ScreenHelper.isTablet(context)

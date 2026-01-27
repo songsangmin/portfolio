@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/pages/components/carousel_items.dart';
 import 'package:portfolio/utils/screen_helper.dart';
@@ -6,7 +7,7 @@ import 'package:responsive_framework/responsive_framework.dart';
 import '../../utils/globals.dart';
 
 class Carousel extends StatelessWidget {
-  CarouselController carouselController = CarouselController();
+  final CarouselController carouselController = CarouselController();
   @override
   Widget build(BuildContext context) {
     double carouselContainerHeight = MediaQuery.of(context).size.height * (ScreenHelper.isMobile(context) ? .7 : .85);
