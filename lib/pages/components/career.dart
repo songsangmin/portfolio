@@ -24,6 +24,45 @@ final List<CareerItem> careerItem = [
       '오류 수정 및 안정화등의 유지보수',
         ],
       ),
+      CareerItem(
+    company: '기독교복음방송 GOODTV',
+    period: '2023.11.01 ~',
+    position: '앱 개발자',
+    works: <App>[ //works
+      App(
+      name: "녹톡(KNOCKTALK)",
+      detail: "Flutter, ASP Classic",
+      works: [
+        '앱 유지보수 및 기능개발',
+        ],
+      ),
+       App(
+      name: "GOODTV",
+      detail: "Flutter, ASP Classic",
+      works: [
+        '앱 유지보수 및 기능개발',
+        ],
+      ),
+       App(
+      name: "바이블 애플",
+      detail: "React Native, ASP Classic",
+      works: [
+          '앱 유지보수 및 기능개발',
+          '프로젝트 관리 및 협업',
+          '데이터 분석 및 보고서 작성',
+          '배포 후 안정화',
+        ],
+      ),
+      App(
+      name: "포휴",
+      detail: "React Native, PHP",
+      works: [
+          '앱 유지보수 및 기능개발',
+          '프로젝트 관리 및 협업',
+          '데이터 분석 및 보고서 작성',
+          '배포 후 안정화',
+        ],
+      ),
     ],
   ),
 ];
