@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class ProjectModel {
   final String title;
   final List<String> images;

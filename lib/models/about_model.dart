@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class AboutModel {
   final String title;
   final String period;

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/utils/globals.dart';
 import 'package:portfolio/widgets/horizontal_divide.dart';
-import 'package:portfolio/widgets/vertical_divide.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:portfolio/models/about_model.dart';
 import 'package:portfolio/utils/constants.dart';

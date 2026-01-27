@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'app_model.dart';
 
 class CareerItem {
