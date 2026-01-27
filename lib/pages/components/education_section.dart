@@ -53,10 +53,11 @@ class EducationSection extends StatelessWidget {
   Widget _buildUi(double width) {
     return Container(
       alignment: Alignment.center,
-      child: ResponsiveWrapper(
-        maxWidth: width,
-        minWidth: width,
-        defaultScale: false,
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          maxWidth: width,
+          minWidth: width,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [

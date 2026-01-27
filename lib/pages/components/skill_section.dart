@@ -58,9 +58,11 @@ class SkillSection extends StatelessWidget {
     return Center(
       child: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
-          return ResponsiveWrapper(
-            maxWidth: width,
-            minWidth: width,
+          return ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: width,
+              minWidth: width,
+            ),
             child: Flex(
               direction: ScreenHelper.isMobile(context)
                   ? Axis.vertical

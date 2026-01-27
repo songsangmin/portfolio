@@ -17,26 +17,23 @@ class MyApp extends StatelessWidget {
       title: '송상민 PortFolio',
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.dark,
-      darkTheme: Theme.of(context).copyWith(
-      scaffoldBackgroundColor: kWhiteColor,
-      primaryColor: kPrimaryColor,
-      canvasColor: kWhiteColor,
-      textTheme: GoogleFonts.latoTextTheme(),
+      darkTheme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: kWhiteColor,
+        primaryColor: kPrimaryColor,
+        canvasColor: kWhiteColor,
+        textTheme: GoogleFonts.latoTextTheme(),
       ),
-      builder: (context, widget) => ResponsiveWrapper.builder(
-          ClampingScrollWrapper.builder(context, widget!),
-          defaultScale: true,
-          breakpoints: [// 반응 한계치 설정
-            ResponsiveBreakpoint.resize(450, name: MOBILE),
-            ResponsiveBreakpoint.resize(800, name: TABLET),
-            ResponsiveBreakpoint.resize(1000, name: TABLET),
-            ResponsiveBreakpoint.resize(1200, name: DESKTOP),
-            ResponsiveBreakpoint.resize(2460, name: "4K"),
-          ],
-        background: Container(
-          color: kBackgroundColor,
+      builder: (context, widget) => ResponsiveBreakpoints.builder(
+        child: widget!,
+        breakpoints: [
+          const Breakpoint(start: 0, end: 450, name: MOBILE),
+          const Breakpoint(start: 451, end: 800, name: TABLET),
+          const Breakpoint(start: 801, end: 1000, name: TABLET),
+          const Breakpoint(start: 1001, end: 1200, name: DESKTOP),
+          const Breakpoint(start: 1201, end: 2460, name: DESKTOP),
+          const Breakpoint(start: 2461, end: double.infinity, name: "4K"),
+        ],
       ),
-        ) ,
       home: Home(),
       initialBinding: BindingsBuilder(
           (){

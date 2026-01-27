@@ -28,7 +28,13 @@ jobs:
         run: flutter analyze
 
       - name: Build web
-        run: flutter build web --release --base-href "/portfolio/" --verbose
+        run: |
+          flutter build web --release --base-href "/portfolio/" --verbose 2>&1 | tee build.log
+          if [ $? -ne 0 ]; then
+            echo "Build failed. Showing last 100 lines of output:"
+            tail -n 100 build.log
+            exit 1
+          fi
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3

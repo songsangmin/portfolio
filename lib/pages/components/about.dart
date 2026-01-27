@@ -45,10 +45,11 @@ class About extends StatelessWidget {
           SizedBox(
             height: 30,
           ),
-          ResponsiveWrapper(
-            maxWidth: width,
-            minWidth: width,
-            defaultScale: false,
+          ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: width,
+              minWidth: width,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [

@@ -1,13 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:carousel_slider/carousel_controller.dart' as carousel;
 import 'package:flutter/material.dart';
 import 'package:portfolio/pages/components/carousel_items.dart';
 import 'package:portfolio/utils/screen_helper.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 import '../../utils/globals.dart';
 
 class Carousel extends StatelessWidget {
-  final carousel.CarouselController carouselController = carousel.CarouselController();
+  final CarouselSliderController carouselController = CarouselSliderController();
   @override
   Widget build(BuildContext context) {
     double carouselContainerHeight = MediaQuery.of(context).size.height * (ScreenHelper.isMobile(context) ? .7 : .85);
@@ -54,10 +52,11 @@ class Carousel extends StatelessWidget {
 //큰 화면
 Widget _buildDesktop(BuildContext context, Widget text, Widget image){
   return Center(
-    child: ResponsiveWrapper(
-      maxWidth: 1100.0,
-      minWidth: 1100.0,
-      defaultScale: false,
+    child: ConstrainedBox(
+      constraints: BoxConstraints(
+        maxWidth: 1100.0,
+        minWidth: 1100.0,
+      ),
       child: Row(
         children: [
           Expanded(
@@ -75,10 +74,11 @@ Widget _buildDesktop(BuildContext context, Widget text, Widget image){
 //중간 화면
 Widget _buildTablet(BuildContext context, Widget text, Widget image){
   return Center(
-      child: ResponsiveWrapper(
-        maxWidth: 760.0,
-        minWidth: 760.0,
-        defaultScale: false,
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          maxWidth: 760.0,
+          minWidth: 760.0,
+        ),
         child: Row(
           children: [
             Expanded(

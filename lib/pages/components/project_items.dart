@@ -1,5 +1,4 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:carousel_slider/carousel_controller.dart' as carousel;
 import 'package:flutter/material.dart';
 import 'package:portfolio/controller/project_controller.dart';
 import 'package:portfolio/pages/components/project.dart';
@@ -23,10 +22,10 @@ final List<ProjectModel> projectItem = [
       techStack: "Flutter, Firebase, Swift, Java")
 ];
 //프로젝트 상세 설명 및 이미지
-class ProjectItem extends GetView<PageController>{
+class ProjectItem extends GetView<ProjectController>{
   @override
   Widget build(BuildContext context) {
-    final carousel.CarouselController carouselController = carousel.CarouselController();
+    final CarouselSliderController carouselController = CarouselSliderController();
     final Size screenSize = MediaQuery.of(context).size;
     final hPadding = ScreenHelper.isDesktop(context) ? screenSize.width / 7
         : ScreenHelper.isTablet(context)
@@ -69,7 +68,7 @@ class ProjectItem extends GetView<PageController>{
                   ),
                   constraints: BoxConstraints(),
                   padding: EdgeInsets.zero,
-                  onPressed: () => carouselController.animateToPage(i),);
+                  onPressed: () => carouselController.jumpToPage(i),);
             }).toList(),
           ),
           SizedBox(

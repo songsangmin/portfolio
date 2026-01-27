@@ -108,12 +108,9 @@ class HeaderLogo extends StatelessWidget {
 class HeaderRow extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    return ResponsiveVisibility(
-      visible: false,
-      visibleWhen: [
-        Condition.largerThan(name: MOBILE),
-      ],
-      child: Row(
+    // Header 위젯의 ScreenHelper에서 이미 모바일/태블릿/데스크톱을 구분하므로
+    // 이 위젯은 모바일이 아닌 경우에만 호출됨
+    return Row(
         children: headerItems.map((item) => item.isButton ? MouseRegion(
           cursor: SystemMouseCursors.click,
           child: Container(
@@ -152,8 +149,7 @@ class HeaderRow extends StatelessWidget{
               ),
             ),)
         ).toList(),
-      ),
-    );
+      );
   }
 
 }

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/models/career_item.dart';
 import 'package:portfolio/pages/components/career_items.dart';
-import 'package:responsive_framework/responsive_wrapper.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 import 'package:portfolio/utils/screen_helper.dart';
-import 'package:timelines/timelines.dart';
 import '../../models/app_model.dart';
 import '../../utils/globals.dart';
 
@@ -85,10 +84,11 @@ class Career extends StatelessWidget {
     return Center(
       child: LayoutBuilder(
         builder: (context, constraints) {
-          return ResponsiveWrapper(
-            maxWidth: width,
-            minWidth: width,
-            defaultScale: false,
+          return ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: width,
+              minWidth: width,
+            ),
             child: Column(
               children: [ //최상단 제목
                 Text(
@@ -101,121 +101,144 @@ class Career extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 50,),
-                FixedTimeline.tileBuilder( //타임라인위젯
-                  theme: TimelineThemeData(
-                    nodePosition: ScreenHelper.isMobile(context) ? 0.0 : 0.5,
-                    color: Colors.black,
-                    indicatorTheme: IndicatorThemeData( //노드 테마
-                      position: 0,
-                      size: 30.0,
-                    ),
-                    connectorTheme: ConnectorThemeData( //연결선 테마
-                      thickness: 4,
-                    ),
-                  ),
-                  builder: TimelineTileBuilder.connected( //아이템 개수만큼 노드 늘리기
-                    contentsAlign: ScreenHelper.isMobile(context)
-                        ? ContentsAlign.basic
-                        : ContentsAlign.alternating,
-                      connectionDirection: ConnectionDirection.before,
-                      itemCount: careerItem.length + 1,
-                    contentsBuilder: (_, int index) {
-                      if(index == careerItem.length) return null;
-                      return Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 15.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          if(ScreenHelper.isDesktop(context)) //데스크탑 일시 회사와 기간 설정
-                            Row(
-                              children: [
-                                Text(
-                                careerItem[index].company,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontFamily: "Jalnan",
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 28,
-                                ),
-                              ),
-                                SizedBox(width: 10,),
-                                Text(
-                                  careerItem[index].period,
-                                  style: TextStyle(
-                                      fontFamily: "Jalnan",
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.grey
-                                  ),
-                                ),
-
-                              ],
-                            )
-                          else
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
-                              children: <Widget>[
-                                Text(
-                                  careerItem[index].company,
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontFamily: "Jalnan",
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 28,
-                                  ),
-                                ),
-                                Text(
-                                  careerItem[index].period,
-                                  style: TextStyle(
-                                      fontFamily: "Jalnan",
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.grey
-                                  ),
-                                ),
-                              ],
-                            ),
-                          Text(
-                            careerItem[index].position,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontFamily: "Jalnan",
-                              color: Colors.grey,
-                              fontSize: 20
-                            ),
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: List<CareerSection>.generate(
-                              careerItem[index].works.length,
-                                (int index2){
-                                return CareerSection(
-                                  app: careerItem[index].works[index2],
-                                );
-                                }
-                            ),
-                          )
-                        ],
-                      ),
-                      );
-                    },
-                    indicatorBuilder: (_, int index){
-                      return OutlinedDotIndicator( //점 바깥선 테두리 두께
-                        borderWidth: 4,
-                      );
-                    },
-                    connectorBuilder: (_, int index, ___) => SolidLineConnector(
-                      thickness: 4,
-                    )
-                  ),
-                )
+                // 커스텀 타임라인 위젯
+                _buildCustomTimeline(context)
               ],
             ),
           );
         },
       ),
+    );
+  }
+
+  Widget _buildCustomTimeline(BuildContext context) {
+    final bool isMobile = ScreenHelper.isMobile(context);
+    final double nodePosition = isMobile ? 0.0 : 0.5;
+    final double indicatorSize = 30.0;
+    final double connectorThickness = 4.0;
+
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      itemCount: careerItem.length,
+      itemBuilder: (context, index) {
+        final bool isLast = index == careerItem.length - 1;
+        final bool isAlternating = !isMobile && index % 2 == 1;
+
+        return Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // 왼쪽 또는 중앙에 인디케이터 배치
+            if (nodePosition == 0.0 || !isAlternating)
+              SizedBox(width: nodePosition == 0.0 ? 0 : (MediaQuery.of(context).size.width * 0.5 - indicatorSize / 2)),
+            // 인디케이터와 연결선
+            Column(
+              children: [
+                Container(
+                  width: indicatorSize,
+                  height: indicatorSize,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: Colors.black, width: 4),
+                    color: Colors.white,
+                  ),
+                ),
+                if (!isLast)
+                  Container(
+                    width: connectorThickness,
+                    height: 100,
+                    color: Colors.black,
+                  ),
+              ],
+            ),
+            SizedBox(width: 15.0),
+            // 콘텐츠
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    if (ScreenHelper.isDesktop(context))
+                      Row(
+                        children: [
+                          Text(
+                            careerItem[index].company,
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: "Jalnan",
+                              fontWeight: FontWeight.bold,
+                              fontSize: 28,
+                            ),
+                          ),
+                          SizedBox(width: 10),
+                          Text(
+                            careerItem[index].period,
+                            style: TextStyle(
+                              fontFamily: "Jalnan",
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ],
+                      )
+                    else
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          Text(
+                            careerItem[index].company,
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: "Jalnan",
+                              fontWeight: FontWeight.bold,
+                              fontSize: 28,
+                            ),
+                          ),
+                          Text(
+                            careerItem[index].period,
+                            style: TextStyle(
+                              fontFamily: "Jalnan",
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ],
+                      ),
+                    Text(
+                      careerItem[index].position,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "Jalnan",
+                        color: Colors.grey,
+                        fontSize: 20,
+                      ),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: List<CareerSection>.generate(
+                        careerItem[index].works.length,
+                        (int index2) {
+                          return CareerSection(
+                            app: careerItem[index].works[index2],
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            // 오른쪽에 인디케이터 배치 (alternating 모드)
+            if (nodePosition == 0.5 && isAlternating)
+              SizedBox(width: MediaQuery.of(context).size.width * 0.5 - indicatorSize / 2),
+          ],
+        );
+      },
     );
   }
 }

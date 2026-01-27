@@ -35,10 +35,11 @@ class Footer extends StatelessWidget {
 
 Widget _buildUi(double width, BuildContext context) {
   return Center(
-    child: ResponsiveWrapper(
-      maxWidth: width,
-      minWidth: width,
-      defaultScale: false,
+    child: ConstrainedBox(
+      constraints: BoxConstraints(
+        maxWidth: width,
+        minWidth: width,
+      ),
       child: LayoutBuilder(
         builder: (context, constraints) {
           return Column(
