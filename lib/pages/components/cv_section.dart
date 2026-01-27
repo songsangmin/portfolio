@@ -43,10 +43,11 @@ class CvSection extends StatelessWidget{
   }
 
   Widget _buildUi(BuildContext context, double width){
-    return ResponsiveWrapper(
-        maxWidth: width,
-        minWidth: width,
-        defaultScale: false,
+    return ConstrainedBox(
+        constraints: BoxConstraints(
+          maxWidth: width,
+          minWidth: width,
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
