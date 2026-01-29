@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/models/career_item.dart';
 import 'package:portfolio/pages/components/career_items.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 import 'package:portfolio/utils/screen_helper.dart';
 import '../../models/app_model.dart';
 import '../../utils/constants.dart';
