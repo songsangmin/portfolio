@@ -1,113 +1,260 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:portfolio/controller/project_controller.dart';
-import 'package:portfolio/pages/components/project.dart';
-import 'package:portfolio/utils/screen_helper.dart';
 import 'package:portfolio/models/project_model.dart';
-import 'package:get/get.dart';
+import 'package:portfolio/widgets/horizontal_divide.dart';
+import 'package:url_launcher/url_launcher.dart';
+import '../../widgets/image_with_animated_opacity.dart';
 
-import '../../utils/constants.dart';
-import '../../utils/globals.dart';
+// 프로젝트 전체
+class Project extends StatelessWidget{
 
-final List<ProjectModel> projectItem = [
-  ProjectModel(
-      title: "하움(하루배움)",
-      images: <String>[
-        'assets/haum1.png',
-        'assets/haum3.png',
-        'assets/haum2.png',
-      ],
-      detail: "과거와 현재의 명언을 통해, 엄섬된 좋은 글귀들을 마음이 편안해지는 감성적인 이미지와 매일 받아볼 수 있는 어플입니다.\n명언과 글귀를 통해"
-              "하루에 격려와 위로의 배움을 얻을 수 있습니다.",
-      function: "글귀 저장, 글귀 보관함, 하움 알림, 위젯, 글귀 모음, 글귀 캘린더",
-      techStack: "Flutter, Firebase, Swift, Java")
-];
-//프로젝트 상세 설명 및 이미지
-class ProjectItem extends GetView<ProjectController>{
+  Project({required this.project});
+
+  final ProjectModel project;
+
   @override
   Widget build(BuildContext context) {
-    final CarouselSliderController carouselController = CarouselSliderController();
     final Size screenSize = MediaQuery.of(context).size;
-    final hPadding = ScreenHelper.isDesktop(context) ? screenSize.width / 7
-        : ScreenHelper.isTablet(context)
-        ? screenSize.width / 10
-        : screenSize.width / 13;
-    final List<int> carouselIndexes = Iterable<int>.generate(projectItem.length).toList();
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: hPadding, vertical: 70),
-      child: Column(
-        key: Globals.projectKey,
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-            decoration: BoxDecoration(
-              gradient: kPrimaryGradient,
-              borderRadius: BorderRadius.circular(kBorderRadius),
-              boxShadow: kCardShadow,
-            ),
-            child: Text(
-              'Project',
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          vertical: 20.0,
+          horizontal: 40.0,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              project.title,
               style: TextStyle(
+                fontSize: 30.0,
+                fontFamily: "Jalnan",
                 fontWeight: FontWeight.w900,
-                fontFamily: 'Museum',
-                fontSize: 35,
-                color: kWhiteColor,
-                letterSpacing: 1.2,
+                color: Colors.black,
               ),
             ),
-          ),
-          SizedBox(
-            height: 50,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: carouselIndexes.map((int i) {
-              return IconButton(
-                  icon: GetBuilder<ProjectController>(
-                    builder: (controller) {
-                      final int currentIndex
-                      = screenSize.width >= 1100 && controller.currentIndex > 2
-                          ? controller.currentIndex % 3
-                          : controller.currentIndex;
-                      return Icon(
-                        Icons.circle,
-                        color: currentIndex == i
-                          ? Colors.black87
-                            : Colors.black12,
-                        size: 18,
-                      );
-                    },
-                  ),
-                  constraints: BoxConstraints(),
-                  padding: EdgeInsets.zero,
-                  onPressed: () => carouselController.jumpToPage(i),);
-            }).toList(),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          CarouselSlider(
-              items: projectItem.map((ProjectModel project) => Builder(
-                builder: (BuildContext context){
-                  return Project(
+            SizedBox(
+              height: 30,
+            ),
+            if(screenSize.width < 1050)
+              Column(
+                children: <Widget>[
+                  ProjectImage(
                     project: project,
-                  );
-                },
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  ProjectDetail(
+                    project: project,
+                  ),
+                ],
+              )
+            else
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Column(
+                      children: <Widget>[
+                        ProjectImage(
+                          project: project,
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                      width: 40,
+                  ),
+                  Expanded(
+                    child: ProjectDetail(
+                      project: project,
+                    ),
+                  )
+                ],
+              )
+          ],
+        ),
+      )
+    );
+  }
+}
+
+//프로젝트 이미지 Part
+class ProjectImage extends StatelessWidget {
+
+  ProjectImage({ required this.project});
+
+  final ProjectModel project;
+
+  @override
+  Widget build(BuildContext context) {
+    return CarouselSlider( // 프로젝트가 한개에서 멈추지 않을 것이기에 슬라이드쇼로 구현
+        items: project.images
+            .map(
+                (String image) => Builder(
+                  builder: (BuildContext context){
+                    return AspectRatio(
+                        aspectRatio: 16 / 12,
+                      child: Container(
+                        clipBehavior: Clip.hardEdge,
+                        decoration: BoxDecoration(),
+                        child: ImageWithAnimatedOpacity( // Image 변경 위젯
+                          image: AssetImage(image),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    );
+                  },
+                ),).toList(),
+        options: CarouselOptions( // 변경 기본 설정
+          aspectRatio: 16 / 12,
+          autoPlay: true,
+          autoPlayInterval: Duration(seconds: 5),
+          viewportFraction: 1.5,
+        ));
+  }
+}
+
+//프로젝트 설명 파트
+class ProjectDetail extends StatelessWidget{
+ ProjectDetail({required this.project});
+
+ final ProjectModel project;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(project.detail, style: TextStyle(
+          fontFamily: "Jalnan",
+          fontSize: 22,
+          fontWeight: FontWeight.w400
+        ),),
+        HorizontalDivide(space: 30,color: Colors.black54,),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 5,
+              //vertical: 12,
+            ),
+            child: Icon(
+              Icons.circle,
+              size: 15,
+            ),
+          ),
+          Text('주요 기능:',style: TextStyle(
+            fontFamily: "Jalnan",
+            fontSize: 17.5,
+          ),),
+          SizedBox(width: 10,),
+          Expanded(
+              child: Text(project.function, style: TextStyle(
+                fontFamily: "Jalnan",
+                fontSize: 17.5,
+              ),)),
+        ],),
+        SizedBox(height: 10,),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 5,
+                  //vertical: 12,
+                ),
+            child: Icon(
+              Icons.circle,
+              size: 15,
+            ),),
+            Text('기술 스택:', style: TextStyle(
+              fontFamily: "Jalnan",
+              fontSize: 17.5,
+            ),),
+            SizedBox(width: 10,),
+            Expanded(
+              child: Text(project.techStack, style: TextStyle(
+                fontFamily: "Museum",
+                fontWeight: FontWeight.bold,
+                fontSize: 17.5,
+              ),),
+            ),
+            SizedBox(
+              height: 40,
+            )
+          ],
+        ),
+        Row(
+          children: [
+            MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                height: 48.0,
+                padding: EdgeInsets.symmetric(
+                  horizontal: 28.0,
+                ),
+                child: TextButton(
+                  onPressed: () async {
+                    final uri = Uri.parse("https://play.google.com/store/apps/details?id=com.ha.woom&hl=ko&gl=US");
+                    if (await canLaunchUrl(uri)) {
+                      await launchUrl(uri, mode: LaunchMode.externalApplication);
+                    }
+                  },
+                  child: Center(
+                    child: Text(
+                      "ANDROID APP",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 13.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
               ),
-              ).toList(),
-              carouselController: carouselController,
-              options: CarouselOptions(
-                initialPage: 1,//controller.currentIndex,
-                onPageChanged: (int index, CarouselPageChangedReason reason){
-                  //controller.changeCurrentIndex(index);
-                },
-                viewportFraction: 1,
-                aspectRatio: screenSize.width < 1050
-                  ? 16 / 18 * (screenSize.width / 1050)
-                    : (screenSize.width < 1300 ? 16 / 10 : 16 / 8)
-              ))
-        ],
-      ),
+            ),
+            SizedBox(width: 20,),
+            MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8.0),
+                  border: Border.all(
+                    color: Colors.black,
+                  ),
+                ),
+                height: 48.0,
+                padding: EdgeInsets.symmetric(horizontal: 28.0),
+                child: TextButton(
+                  onPressed: () async {
+                    final uri = Uri.parse("https://apps.apple.com/kr/app/%ED%95%98%EC%9B%80/id1503624763");
+                    if (await canLaunchUrl(uri)) {
+                      await launchUrl(uri, mode: LaunchMode.externalApplication);
+                    }
+                  },
+                  child: Center(
+                    child: Text(
+                      "IOS APP",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 13.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

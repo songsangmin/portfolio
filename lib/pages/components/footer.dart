@@ -51,80 +51,80 @@ Widget _buildUi(double width, BuildContext context) {
                   runSpacing: 20.0,
                   children: footerItems
                       .map(
-                        (footerItem) => MouseRegion(
-                          cursor: SystemMouseCursors.click,
-                          child: GestureDetector(
-                            onTap: () async {
-                              final uri = Uri.parse(footerItem.text1);
-                              if (await canLaunchUrl(uri)) {
-                                await launchUrl(uri, mode: LaunchMode.externalApplication);
-                              }
-                            },
-                            child: Container(
-                              height: 140.0,
-                              width: ScreenHelper.isMobile(context)
-                                  ? constraints.maxWidth / 2.0 - 10.0
-                                  : constraints.maxWidth / 4.0 - 15.0,
-                              padding: EdgeInsets.all(20),
-                              decoration: BoxDecoration(
-                                color: kSurfaceColor,
-                                borderRadius: BorderRadius.circular(kBorderRadius),
-                                boxShadow: kCardShadow,
-                                border: Border.all(
-                                  color: kPrimaryColor.withValues(alpha: 0.2),
-                                  width: 1,
+                        (footerItem) => Container(
+                      height: 120.0,
+                      width: ScreenHelper.isMobile(context)
+                          ? constraints.maxWidth / 2.0 - 20.0
+                          : constraints.maxWidth / 4.0 - 20.0,
+                      child: Container(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Image.asset(
+                                  footerItem.iconPath,
+                                  width: 30.0,
+                                  fit: BoxFit.cover,
                                 ),
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    padding: EdgeInsets.all(12),
-                                    decoration: BoxDecoration(
-                                      gradient: kPrimaryGradient,
-                                      borderRadius: BorderRadius.circular(kBorderRadiusSmall),
-                                    ),
-                                    child: Image.asset(
-                                      footerItem.iconPath,
-                                      width: 32.0,
-                                      fit: BoxFit.cover,
-                                    ),
+                                SizedBox(
+                                  width: 15.0,
+                                ),
+                                Text(
+                                  footerItem.title,
+                                  style: TextStyle(
+                                    fontFamily: "Jalnan",
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.black,
                                   ),
-                                  SizedBox(height: 16),
-                                  Text(
-                                    footerItem.title,
-                                    style: TextStyle(
-                                      fontFamily: "Jalnan",
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.w700,
-                                      color: kTextPrimary,
-                                    ),
-                                  ),
-                                  SizedBox(height: 8),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        "Visit ",
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          fontFamily: "Museum",
-                                          fontWeight: FontWeight.w400,
-                                          color: kTextSecondary,
-                                        ),
-                                      ),
-                                      Icon(
-                                        Icons.arrow_forward,
-                                        size: 16,
-                                        color: kPrimaryColor,
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
-                          ),
+                            SizedBox(
+                              height: 15.0,
+                            ),Row(
+                              children: [ //Todo 나중에 디자인 이쁘게 바꿔보기
+                                Text("Check ", style: TextStyle(
+                                 fontSize: 15,
+                                 fontFamily: "Museum",
+                                 fontWeight: FontWeight.w300,
+                                 color: Colors.black,
+                                ),),
+                                MouseRegion(
+                                  cursor: SystemMouseCursors.click,
+                                  child: GestureDetector(
+                                    onTap: () async {
+                                      final uri = Uri.parse(footerItem.text1);
+                                      if (await canLaunchUrl(uri)) {
+                                        await launchUrl(uri, mode: LaunchMode.externalApplication);
+                                      }
+                                    },
+                                    child: Text(
+                                      "${footerItem.title}️",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: "Museum",
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Text(" ✔", style: TextStyle(
+                                  fontSize: 17,
+                                  fontFamily: "Museum",
+                                  fontWeight: FontWeight.w300,
+                                  color: Colors.black,
+                                ),),
+                              ],
+                            ),
+                          ],
                         ),
-                      )
+                      ),
+                    ),
+                  )
                       .toList(),
                 ),
               ),
@@ -142,26 +142,23 @@ Widget _buildUi(double width, BuildContext context) {
                   Padding(
                     padding: EdgeInsets.only(bottom: 8.0),
                     child: Text(
-                      "Copyright (c) 2025 SongSangMin. All rights Reserved",
+                      "Copyright (c) 2022 SongSangMin. All rights Reserved",
                       style: TextStyle(
                         color: kCaptionColor,
-                        fontSize: 14,
                       ),
                     ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      MouseRegion(
-                        cursor: SystemMouseCursors.click,
-                        child: GestureDetector(
-                          onTap: () {},
+                      GestureDetector(
+                        onTap: () {},
+                        child: MouseRegion(
+                          cursor: SystemMouseCursors.click,
                           child: Text(
                             "Privacy Policy",
                             style: TextStyle(
-                              color: kPrimaryColor,
-                              fontSize: 14,
-                              decoration: TextDecoration.underline,
+                              color: kCaptionColor,
                             ),
                           ),
                         ),
@@ -175,16 +172,14 @@ Widget _buildUi(double width, BuildContext context) {
                           ),
                         ),
                       ),
-                      MouseRegion(
-                        cursor: SystemMouseCursors.click,
-                        child: GestureDetector(
-                          onTap: () {},
+                      GestureDetector(
+                        onTap: () {},
+                        child: MouseRegion(
+                          cursor: SystemMouseCursors.click,
                           child: Text(
                             "Terms & Conditions",
                             style: TextStyle(
-                              color: kPrimaryColor,
-                              fontSize: 14,
-                              decoration: TextDecoration.underline,
+                              color: kCaptionColor,
                             ),
                           ),
                         ),
