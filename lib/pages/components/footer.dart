@@ -71,7 +71,7 @@ Widget _buildUi(double width, BuildContext context) {
                                 borderRadius: BorderRadius.circular(kBorderRadius),
                                 boxShadow: kCardShadow,
                                 border: Border.all(
-                                  color: kPrimaryColor.withOpacity(0.2),
+                                  color: kPrimaryColor.withValues(alpha: 0.2),
                                   width: 1,
                                 ),
                               ),

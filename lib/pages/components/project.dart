@@ -1,7 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/models/project_model.dart';
-import 'package:portfolio/widgets/horizontal_divide.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../utils/constants.dart';
 import '../../widgets/image_with_animated_opacity.dart';
@@ -23,10 +22,10 @@ class Project extends StatelessWidget{
           color: kSurfaceColor,
           borderRadius: BorderRadius.circular(kBorderRadius),
           boxShadow: kElevatedShadow,
-          border: Border.all(
-            color: kPrimaryColor.withOpacity(0.2),
-            width: 1,
-          ),
+                    border: Border.all(
+                      color: kPrimaryColor.withValues(alpha: 0.2),
+                      width: 1,
+                    ),
         ),
         child: Padding(
           padding: EdgeInsets.all(32.0),
@@ -159,7 +158,7 @@ class ProjectDetail extends StatelessWidget{
             color: kBackgroundColor,
             borderRadius: BorderRadius.circular(kBorderRadiusSmall),
             border: Border.all(
-              color: kPrimaryColor.withOpacity(0.2),
+              color: kPrimaryColor.withValues(alpha: 0.2),
             ),
           ),
           child: Column(

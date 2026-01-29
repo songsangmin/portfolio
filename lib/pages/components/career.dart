@@ -121,8 +121,6 @@ class Career extends StatelessWidget {
   }
 
   Widget _buildCustomTimeline(BuildContext context) {
-    final bool isMobile = ScreenHelper.isMobile(context);
-    final double nodePosition = isMobile ? 0.0 : 0.5;
     final double indicatorSize = 30.0;
     final double connectorThickness = 4.0;
 
@@ -132,7 +130,6 @@ class Career extends StatelessWidget {
       itemCount: careerItem.length,
       itemBuilder: (context, index) {
         final bool isLast = index == careerItem.length - 1;
-        final bool isAlternating = !isMobile && index % 2 == 1;
 
         return Container(
           margin: EdgeInsets.only(bottom: 32),
@@ -156,12 +153,12 @@ class Career extends StatelessWidget {
                       width: connectorThickness,
                       height: 120,
                       decoration: BoxDecoration(
-                        gradient: LinearGradient(
+                          gradient: LinearGradient(
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
                           colors: [
                             kPrimaryColor,
-                            kPrimaryColor.withOpacity(0.3),
+                            kPrimaryColor.withValues(alpha: 0.3),
                           ],
                         ),
                       ),
@@ -178,7 +175,7 @@ class Career extends StatelessWidget {
                     borderRadius: BorderRadius.circular(kBorderRadius),
                     boxShadow: kCardShadow,
                     border: Border.all(
-                      color: kPrimaryColor.withOpacity(0.2),
+                      color: kPrimaryColor.withValues(alpha: 0.2),
                       width: 1,
                     ),
                   ),

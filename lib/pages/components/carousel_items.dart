@@ -79,7 +79,7 @@ List<CarouselItemModel> carouselItems = List.generate(
                         color: kSurfaceColor,
                         borderRadius: BorderRadius.circular(kBorderRadiusSmall),
                         border: Border.all(
-                          color: kPrimaryColor.withOpacity(0.3),
+                          color: kPrimaryColor.withValues(alpha: 0.3),
                         ),
                       ),
                       child: Text(

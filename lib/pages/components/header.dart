@@ -166,11 +166,11 @@ class Header extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: kSurfaceColor.withOpacity(0.8),
+        color: kSurfaceColor.withValues(alpha: 0.8),
         boxShadow: kCardShadow,
         border: Border(
           bottom: BorderSide(
-            color: kPrimaryColor.withOpacity(0.3),
+            color: kPrimaryColor.withValues(alpha: 0.3),
             width: 1,
           ),
         ),

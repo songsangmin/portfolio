@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/utils/globals.dart';
-import 'package:portfolio/widgets/horizontal_divide.dart';
 import 'package:portfolio/models/about_model.dart';
 import 'package:portfolio/utils/constants.dart';
 import 'package:portfolio/utils/screen_helper.dart';
@@ -75,7 +74,7 @@ class About extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(kBorderRadius),
                                 boxShadow: kCardShadow,
                                 border: Border.all(
-                                  color: kPrimaryColor.withOpacity(0.2),
+                                  color: kPrimaryColor.withValues(alpha: 0.2),
                                   width: 1,
                                 ),
                               ),
