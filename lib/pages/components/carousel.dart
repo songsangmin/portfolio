@@ -12,8 +12,18 @@ class Carousel extends StatelessWidget {
    return Container(
      key: Globals.homeKey,
       height: carouselContainerHeight,
-     color: Colors.white,
      width: double.infinity,
+     decoration: BoxDecoration(
+       gradient: LinearGradient(
+         begin: Alignment.topLeft,
+         end: Alignment.bottomRight,
+         colors: [
+           kBackgroundColor,
+           kSurfaceColor,
+           kBackgroundColor,
+         ],
+       ),
+     ),
      child: Column(
        mainAxisAlignment: MainAxisAlignment.start,
        children: [

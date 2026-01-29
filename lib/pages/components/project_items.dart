@@ -37,13 +37,24 @@ class ProjectItem extends GetView<ProjectController>{
       child: Column(
         key: Globals.projectKey,
         children: <Widget>[
-          Text('Project',
-          style: TextStyle(
-            fontWeight: FontWeight.w900,
-            fontFamily: 'Museum',
-            fontSize: 35,
-            color: Colors.black,
-          ),),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            decoration: BoxDecoration(
+              gradient: kPrimaryGradient,
+              borderRadius: BorderRadius.circular(kBorderRadius),
+              boxShadow: kCardShadow,
+            ),
+            child: Text(
+              'Project',
+              style: TextStyle(
+                fontWeight: FontWeight.w900,
+                fontFamily: 'Museum',
+                fontSize: 35,
+                color: kWhiteColor,
+                letterSpacing: 1.2,
+              ),
+            ),
+          ),
           SizedBox(
             height: 50,
           ),

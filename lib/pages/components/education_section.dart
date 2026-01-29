@@ -60,87 +60,123 @@ class EducationSection extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            SizedBox(
-              height: 40.0,
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              decoration: BoxDecoration(
+                gradient: kPrimaryGradient,
+                borderRadius: BorderRadius.circular(kBorderRadius),
+                boxShadow: kCardShadow,
+              ),
+              child: Text(
+                "Education & Stack",
+                style: TextStyle(
+                  fontFamily: "Museum",
+                  fontWeight: FontWeight.w900,
+                  fontSize: 35,
+                  color: kWhiteColor,
+                  letterSpacing: 1.2,
+                ),
+              ),
             ),
+            SizedBox(height: 40.0),
             LayoutBuilder(
               builder: (context, constraints) {
-                return Container(
-                  child: Wrap(
-                    spacing: 20.0,
-                    runSpacing: 20.0,
-                    children: educationList
-                        .map(
-                          (education) => Container(
-                        width: constraints.maxWidth / 2.0 - 20.0,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Image.asset(
-                                  education.imagePath,
-                                  width: 40.0,
-                                ),
-                                SizedBox(
-                                  width: 15.0,
-                                ),
-                                Text(
-                                  education.period,
-                                  style: TextStyle(
-                                    fontFamily: "Museum",
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.black,
-                                  ),
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                              height: 5.0,
-                            ),
-                            Text(
-                              education.description,
-                              maxLines: 8,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                color: kCaptionColor,
-                                fontFamily: "Jalnan",
-                                fontSize: 15,
-                                height: 1.5,
-                                fontWeight: FontWeight.w600
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20.0,
-                            ),
-                            MouseRegion(
-                              cursor: SystemMouseCursors.click,
-                              child: GestureDetector(
-                                onTap: () async {
-                                  final uri = Uri.parse(education.linkName);
-                                  if (await canLaunchUrl(uri)) {
-                                    await launchUrl(uri, mode: LaunchMode.externalApplication);
-                                  }
-                                },
-                                child: Text(
-                                  "Go ${education.period} Main Site ->",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                  ),
+                return Wrap(
+                  spacing: 20.0,
+                  runSpacing: 20.0,
+                  children: educationList
+                      .map(
+                        (education) => MouseRegion(
+                          cursor: SystemMouseCursors.click,
+                          child: GestureDetector(
+                            onTap: () async {
+                              final uri = Uri.parse(education.linkName);
+                              if (await canLaunchUrl(uri)) {
+                                await launchUrl(uri, mode: LaunchMode.externalApplication);
+                              }
+                            },
+                            child: Container(
+                              width: constraints.maxWidth / 2.0 - 10.0,
+                              padding: EdgeInsets.all(24),
+                              decoration: BoxDecoration(
+                                color: kSurfaceColor,
+                                borderRadius: BorderRadius.circular(kBorderRadius),
+                                boxShadow: kCardShadow,
+                                border: Border.all(
+                                  color: kPrimaryColor.withOpacity(0.2),
+                                  width: 1,
                                 ),
                               ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        padding: EdgeInsets.all(8),
+                                        decoration: BoxDecoration(
+                                          gradient: kPrimaryGradient,
+                                          borderRadius: BorderRadius.circular(kBorderRadiusSmall),
+                                        ),
+                                        child: Image.asset(
+                                          education.imagePath,
+                                          width: 32.0,
+                                        ),
+                                      ),
+                                      SizedBox(width: 12.0),
+                                      Expanded(
+                                        child: Text(
+                                          education.period,
+                                          style: TextStyle(
+                                            fontFamily: "Museum",
+                                            fontSize: 18.0,
+                                            fontWeight: FontWeight.w700,
+                                            color: kTextPrimary,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(height: 16.0),
+                                  Text(
+                                    education.description,
+                                    maxLines: 8,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      color: kTextSecondary,
+                                      fontFamily: "Jalnan",
+                                      fontSize: 14,
+                                      height: 1.6,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  SizedBox(height: 16.0),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "Learn more",
+                                        style: TextStyle(
+                                          color: kPrimaryColor,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                      SizedBox(width: 4),
+                                      Icon(
+                                        Icons.arrow_forward,
+                                        size: 16,
+                                        color: kPrimaryColor,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
-                            SizedBox(
-                              height: 40.0,
-                            )
-                          ],
+                          ),
                         ),
-                      ),
-                    )
-                        .toList(),
-                  ),
+                      )
+                      .toList(),
                 );
               },
             )

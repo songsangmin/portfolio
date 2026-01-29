@@ -57,100 +57,107 @@ List<HeaderItem> headerItems = [
 class HeaderLogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
-      height: 50.0,
-        child: Column(
-          children: [
-            SizedBox(
-              height: 10,
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: () {
+          Scrollable.ensureVisible(
+            Globals.homeKey.currentContext!,
+            duration: Duration(milliseconds: 800),
+            curve: Curves.easeInOut,
+          );
+        },
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(kBorderRadiusSmall),
+            gradient: kPrimaryGradient,
+            boxShadow: kCardShadow,
+          ),
+          child: Text(
+            "<Sangmin Song/>",
+            style: TextStyle(
+              fontFamily: 'Jalnan',
+              color: kWhiteColor,
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 0.5,
             ),
-            MouseRegion(
-                cursor: SystemMouseCursors.click,
-                child: GestureDetector(
-                  onTap: () {
-                    // 웹에서 페이지 새로고침은 JavaScript를 통해 처리
-                    // Flutter 웹에서는 Navigator를 사용하여 홈으로 이동
-                    Scrollable.ensureVisible(
-                      Globals.homeKey.currentContext!,
-                      duration: Duration(seconds: 1),
-                    );
-                  },
-                  child: RichText(
-                    textAlign: TextAlign.center,
-                      text: TextSpan(
-                        children: [
-                        TextSpan(
-                        text: "<Sangmin Song/>",
-                        style: TextStyle(
-                          fontFamily: 'Jalnan',
-                          color: Colors.black,
-                          fontSize: 24.0,
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
-                      ]
-                  ),
-                )
-            )
-    ),
-          ],
-        ));
+          ),
+        ),
+      ),
+    );
   }
-
 }
 
 //헤더 메뉴 구성
 class HeaderRow extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    // Header 위젯의 ScreenHelper에서 이미 모바일/태블릿/데스크톱을 구분하므로
-    // 이 위젯은 모바일이 아닌 경우에만 호출됨
     return Row(
-        children: headerItems.map((item) => item.isButton ? MouseRegion(
-          cursor: SystemMouseCursors.click,
-          child: Container(
-            decoration: BoxDecoration(
-              color: kDangerColor,
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-            padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
-            child: TextButton(
-              onPressed: item.onTap,
-              child: Text(
-                item.title,
-                style: TextStyle(
-                  fontFamily: 'Museum',
-                  color: Colors.black,
-                  fontSize: 13.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ),
-        ) :
-            MouseRegion(cursor: SystemMouseCursors.click,
+      children: headerItems.map((item) {
+        if (item.isButton) {
+          return MouseRegion(
+            cursor: SystemMouseCursors.click,
             child: Container(
-              margin: EdgeInsets.only(right: 30.0),
-              child: GestureDetector(
-                onTap: item.onTap,
-                child: Text(
-                  item.title,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 13.0,
-                    fontWeight: FontWeight.bold,
+              margin: EdgeInsets.only(right: 12.0),
+              decoration: BoxDecoration(
+                gradient: kPrimaryGradient,
+                borderRadius: BorderRadius.circular(kBorderRadiusSmall),
+                boxShadow: kCardShadow,
+              ),
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: item.onTap,
+                  borderRadius: BorderRadius.circular(kBorderRadiusSmall),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                    child: Text(
+                      item.title,
+                      style: TextStyle(
+                        fontFamily: 'Museum',
+                        color: kWhiteColor,
+                        fontSize: 13.0,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 0.5,
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),)
-        ).toList(),
-      );
+            ),
+          );
+        } else {
+          return MouseRegion(
+            cursor: SystemMouseCursors.click,
+            child: Container(
+              margin: EdgeInsets.only(right: 30.0),
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: item.onTap,
+                  borderRadius: BorderRadius.circular(kBorderRadiusSmall),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+                    child: Text(
+                      item.title,
+                      style: TextStyle(
+                        color: kTextPrimary,
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 0.3,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          );
+        }
+      }).toList(),
+    );
   }
-
 }
 // 각 기기마다 헤더를 다르게 빌드
 class Header extends StatelessWidget {
@@ -159,7 +166,14 @@ class Header extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        border: Border(bottom: BorderSide(color: Colors.black, width: 2))
+        color: kSurfaceColor.withOpacity(0.8),
+        boxShadow: kCardShadow,
+        border: Border(
+          bottom: BorderSide(
+            color: kPrimaryColor.withOpacity(0.3),
+            width: 1,
+          ),
+        ),
       ),
       child: ScreenHelper(
         desktop: Padding(
@@ -185,10 +199,17 @@ class Header extends StatelessWidget {
                 onTap: () {
                   Globals.scaffoldKey.currentState?.openEndDrawer();
                 },
-                child: Icon(
-                  Icons.import_contacts_sharp,
-                  color: Colors.white,
-                  size: 28.0,
+                child: Container(
+                  padding: EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    gradient: kPrimaryGradient,
+                    borderRadius: BorderRadius.circular(kBorderRadiusSmall),
+                  ),
+                  child: Icon(
+                    Icons.menu,
+                    color: kWhiteColor,
+                    size: 24.0,
+                  ),
                 )
               )
             ],

@@ -18,10 +18,14 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.dark,
       darkTheme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: kWhiteColor,
+        scaffoldBackgroundColor: kBackgroundColor,
         primaryColor: kPrimaryColor,
-        canvasColor: kWhiteColor,
-        textTheme: GoogleFonts.latoTextTheme(),
+        canvasColor: kBackgroundColor,
+        cardColor: kSurfaceColor,
+        textTheme: GoogleFonts.latoTextTheme().apply(
+          bodyColor: kTextPrimary,
+          displayColor: kTextPrimary,
+        ),
       ),
       builder: (context, widget) => ResponsiveBreakpoints.builder(
         child: widget!,

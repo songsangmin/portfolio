@@ -83,71 +83,94 @@ class SkillSection extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        "SKILLS",
-                        style: TextStyle(
-                          fontFamily: "Museum",
-                          color: Colors.black,
-                          fontWeight: FontWeight.w900,
-                          fontSize: 28.0,
-                          height: 1.3,
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                        decoration: BoxDecoration(
+                          gradient: kPrimaryGradient,
+                          borderRadius: BorderRadius.circular(kBorderRadius),
+                          boxShadow: kCardShadow,
+                        ),
+                        child: Text(
+                          "SKILLS",
+                          style: TextStyle(
+                            fontFamily: "Museum",
+                            color: kWhiteColor,
+                            fontWeight: FontWeight.w900,
+                            fontSize: 28.0,
+                            letterSpacing: 1.2,
+                          ),
                         ),
                       ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
+                      SizedBox(height: 16.0),
                       Text(
                         "제가 사용하고 사용할 수 있는 Skill들의 숙련도 입니다.",
                         style: TextStyle(
                           fontFamily: "Jalnan",
-                          color: kCaptionColor,
+                          color: kTextSecondary,
                           height: 1.5,
                           fontSize: 16.0,
                         ),
                       ),
-                      SizedBox(
-                        height: 15.0,
-                      ),
+                      SizedBox(height: 24.0),
                       Column(
                         children: skills
                             .map(
                               (skill) => Container(
-                            margin: EdgeInsets.only(bottom: 15.0),
-                            child: Row(
+                            margin: EdgeInsets.only(bottom: 20.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Expanded(
-                                  flex: skill.percentage,
-                                  child: Container(
-                                    padding: EdgeInsets.only(left: 10.0),
-                                    alignment: Alignment.centerLeft,
-                                    height: 38.0,
-                                    child: Text(skill.skill,style: TextStyle(
-                                      fontFamily: "Museum",
-                                      color: Colors.white
-                                    ),),
-                                    color: Colors.black,
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      skill.skill,
+                                      style: TextStyle(
+                                        fontFamily: "Museum",
+                                        color: kTextPrimary,
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    Text(
+                                      "${skill.percentage}%",
+                                      style: TextStyle(
+                                        color: kPrimaryColor,
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 8),
+                                Container(
+                                  height: 12.0,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(6),
+                                    color: kSurfaceColor,
+                                  ),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(6),
+                                    child: TweenAnimationBuilder<double>(
+                                      tween: Tween<double>(begin: 0, end: skill.percentage / 100),
+                                      duration: Duration(milliseconds: 1500),
+                                      curve: Curves.easeOutCubic,
+                                      builder: (context, value, child) {
+                                        return LinearProgressIndicator(
+                                          value: value,
+                                          backgroundColor: Colors.transparent,
+                                          valueColor: AlwaysStoppedAnimation<Color>(
+                                            Color.lerp(
+                                              Color(0xFF6366F1),
+                                              Color(0xFFEC4899),
+                                              value,
+                                            )!,
+                                          ),
+                                        );
+                                      },
+                                    ),
                                   ),
                                 ),
-                                SizedBox(
-                                  width: 10.0,
-                                ),
-                                Expanded(
-                                  // remaining (blank part)
-                                  flex: 100 - skill.percentage,
-                                  child: Divider(
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 10.0,
-                                ),
-                                Text(
-                                  "${skill.percentage}%",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16.0,
-                                  ),
-                                )
                               ],
                             ),
                           ),

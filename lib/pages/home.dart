@@ -16,56 +16,88 @@ class Home extends StatelessWidget {
     return Scaffold(
       key: Globals.scaffoldKey,
       endDrawer: Drawer(
+        backgroundColor: kSurfaceColor,
         child: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 16.0,
-              vertical: 24.0,
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  kSurfaceColor,
+                  kBackgroundColor,
+                ],
+              ),
             ),
-            child: ListView.separated(
-              itemBuilder: (BuildContext context, int index) {
-                return headerItems[index].isButton
-                    ? MouseRegion(
-                  cursor: SystemMouseCursors.click,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: kDangerColor,
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    padding: EdgeInsets.symmetric(horizontal: 28.0),
-                    child: TextButton(
-                      onPressed: headerItems[index].onTap,
-                      child: Text(
-                        headerItems[index].title,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 13.0,
-                          fontWeight: FontWeight.bold,
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 24.0,
+              ),
+              child: ListView.separated(
+                itemBuilder: (BuildContext context, int index) {
+                  return headerItems[index].isButton
+                      ? MouseRegion(
+                    cursor: SystemMouseCursors.click,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        gradient: kPrimaryGradient,
+                        borderRadius: BorderRadius.circular(kBorderRadiusSmall),
+                        boxShadow: kCardShadow,
+                      ),
+                      margin: EdgeInsets.symmetric(vertical: 4),
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          onTap: headerItems[index].onTap,
+                          borderRadius: BorderRadius.circular(kBorderRadiusSmall),
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+                            child: Center(
+                              child: Text(
+                                headerItems[index].title,
+                                style: TextStyle(
+                                  color: kWhiteColor,
+                                  fontSize: 14.0,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 0.5,
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                )
-                    : ListTile(
-                  title: Text(
-                    headerItems[index].title,
-                    style: TextStyle(
-                      color: Colors.white,
+                  )
+                      : ListTile(
+                    onTap: headerItems[index].onTap,
+                    title: Text(
+                      headerItems[index].title,
+                      style: TextStyle(
+                        color: kTextPrimary,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                  ),
-                );
-              },
-              separatorBuilder: (BuildContext context, int index) {
-                return SizedBox(
-                  height: 10.0,
-                );
-              },
-              itemCount: headerItems.length,
+                    trailing: Icon(
+                      Icons.chevron_right,
+                      color: kPrimaryColor,
+                    ),
+                  );
+                },
+                separatorBuilder: (BuildContext context, int index) {
+                  return SizedBox(height: 8.0);
+                },
+                itemCount: headerItems.length,
+              ),
             ),
           ),
         ),
       ),
       body: Container(
+        decoration: BoxDecoration(
+          gradient: kBackgroundGradient,
+        ),
         child: Column(
           children: [
             Container(
