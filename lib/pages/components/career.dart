@@ -3,6 +3,7 @@ import 'package:portfolio/models/career_item.dart';
 import 'package:portfolio/pages/components/career_items.dart';
 import 'package:portfolio/utils/screen_helper.dart';
 import '../../models/app_model.dart';
+import '../../utils/constants.dart';
 import '../../utils/globals.dart';
 
 //이력서 Item

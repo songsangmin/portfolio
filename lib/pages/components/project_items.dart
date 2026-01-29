@@ -6,6 +6,7 @@ import 'package:portfolio/utils/screen_helper.dart';
 import 'package:portfolio/models/project_model.dart';
 import 'package:get/get.dart';
 
+import '../../utils/constants.dart';
 import '../../utils/globals.dart';
 
 final List<ProjectModel> projectItem = [

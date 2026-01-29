@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/models/project_model.dart';
 import 'package:portfolio/widgets/horizontal_divide.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../utils/constants.dart';
 import '../../widgets/image_with_animated_opacity.dart';
 
 // 프로젝트 전체

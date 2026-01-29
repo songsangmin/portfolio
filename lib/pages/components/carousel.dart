@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/pages/components/carousel_items.dart';
 import 'package:portfolio/utils/screen_helper.dart';
+import '../../utils/constants.dart';
 import '../../utils/globals.dart';
 
 class Carousel extends StatelessWidget {
