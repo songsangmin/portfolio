@@ -73,10 +73,10 @@ const RESOURCES = {"apple-icon-72x72.png": "d8ea92ef36cfad933e81e1560b3126f4",
 "android-icon-36x36.png": "5eebbe971ee4881762dd6bbfb43c3dac",
 "favicon.ico": "6d6b7dc9e73a399fed0ed32079a466fb",
 "ms-icon-150x150.png": "e9a6d68a55f5b2dd70a4641341ac4557",
-"flutter_bootstrap.js": "c55960c0c2c4b13b34e02e4a516cb3d4",
+"flutter_bootstrap.js": "3868cf78b5187cdcb053a6a3a2730aaf",
 "version.json": "009c9e65172e010890f7f65fde438006",
 "ms-icon-70x70.png": "d55abf4a2d1bdce7f7110f3d3cfae807",
-"main.dart.js": "5a70b092593da2d765a2bba5722553c3",
+"main.dart.js": "55b9b2b55d1d1a488d291d53840c50da",
 "ms-icon-144x144.png": "a80ace4513b322a2ae948b9d5e70323b",
 "apple-icon-144x144.png": "a80ace4513b322a2ae948b9d5e70323b"};
 // The application shell files that are downloaded before a service worker can
