@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/utils/globals.dart';
 import 'package:portfolio/widgets/horizontal_divide.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 import 'package:portfolio/models/about_model.dart';
 import 'package:portfolio/utils/constants.dart';
 import 'package:portfolio/utils/screen_helper.dart';
@@ -10,8 +9,8 @@ import 'package:portfolio/utils/screen_helper.dart';
 final List<AboutModel> abouts = [
   AboutModel(title: "송상민 / SangMin Song", period: "1997.12.05 / 경기도 안산시" ,detail: "qjsrotkdals@naver.com\nqjsrotkdals@gmail.com", period2: "", detail2: "", period3: '', detail3: '', detail4: '', period4: '', period5: '', detail5: '',),
   AboutModel(title: "Education", period: "2013.03-2016.02",detail: "성포고등학교", period2: "2016.03-2022.02", detail2: "한신대학교 컴퓨터공학\n", detail3: '', period3: '', period4: '', detail4: '', period5: '', detail5: '' ),
-  AboutModel(title: "Career", period: "2021.09-2022.12" ,detail: "트라콤 / 인턴", period2: "2023.11.01 ~ 2026.03.01", detail2: "기독교복음방송 GOODTV", period3: '', detail3: '', period4: '', detail4: '', period5: '', detail5: ''),
-  AboutModel(title: "Project", period: "2020.04", detail: "명언, 글귀 어플 '하움'개발 (Flutter)", period2: "2022.08", detail2: "개인 포트폴리오 페이지 개발 (Flutter Web)", period3: "2022.11.01 ~", detail3: "GOODTV, 녹톡(KNOCKTALK) Flutter 앱 유지보수 및 기능개발", period4: "2022.11.01 ~", detail4: "다번역성경찬송, 포휴 React Native 앱 유지보수 및 기능개발", period5:"" , detail5: ""),
+  AboutModel(title: "Career", period: "2021.09-2022.12" ,detail: "트라콤 / 인턴", period2: "2023.11.01 ~", detail2: "기독교복음방송 GOODTV", period3: '2023.11.01 ~ 2026.04.01', detail3: '', period4: '', detail4: '', period5: '', detail5: ''),
+  AboutModel(title: "Project", period: "2020.04", detail: "명언, 글귀 어플 '하움'개발 (Flutter)", period2: "2022.08", detail2: "개인 포트폴리오 페이지 개발 (Flutter Web)", period3: "2022.11.01 ~", detail3: "GOODTV, 녹톡(KNOCKTALK) 앱 유지보수 및 기능개발", period4: "2022.02.01 ~", detail4: "다번역성경찬송, 포휴 앱 유지보수 및 기능개발", period5:"" , detail5: ""),
   AboutModel(title: "Certificate", period: "2022.09", detail: "정보처리기사", period2: "", detail2: "", period3: '', detail3: '', period4: '', detail4: '', period5: '', detail5: ''),
 ];
 
@@ -57,15 +56,15 @@ class About extends StatelessWidget {
                   builder: (context, constraints) {
                     return Container(
                       decoration: BoxDecoration(
-                        border: Border(left: BorderSide(width: 2))
+                          border: Border(left: BorderSide(width: 2))
                       ),
                       child: Wrap(
                         children: abouts
                             .map(
                               (about) => Container(
-                                decoration: BoxDecoration(
-                                  border: Border( right: BorderSide(width: 2),)
-                                ),
+                            decoration: BoxDecoration(
+                                border: Border( right: BorderSide(width: 2),)
+                            ),
                             width: constraints.maxWidth / 2.0 - 20.0,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -114,7 +113,6 @@ class About extends StatelessWidget {
                                       height: 1.5,
                                       fontWeight: FontWeight.w600
                                   ),
-
                                 ),
                                 SizedBox(
                                   height: 15,
@@ -198,14 +196,6 @@ class About extends StatelessWidget {
                         )
                             .toList(),
                       ),
-                    );
-                  },
-                )
-              ],
-            ),
-          ),
-        ],
-      ),
                     );
                   },
                 )
