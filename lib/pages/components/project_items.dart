@@ -10,16 +10,19 @@ import '../../utils/globals.dart';
 
 final List<ProjectModel> projectItem = [
   ProjectModel(
-      title: "하움(하루배움)",
-      images: <String>[
-        'assets/haum1.png',
-        'assets/haum3.png',
-        'assets/haum2.png',
-      ],
-      detail: "과거와 현재의 명언을 통해, 엄섬된 좋은 글귀들을 마음이 편안해지는 감성적인 이미지와 매일 받아볼 수 있는 어플입니다.\n명언과 글귀를 통해"
-              "하루에 격려와 위로의 배움을 얻을 수 있습니다.",
-      function: "글귀 저장, 글귀 보관함, 하움 알림, 위젯, 글귀 모음, 글귀 캘린더",
-      techStack: "Flutter, Firebase, Swift, Java")
+    title: "하움(하루배움)",
+    images: <String>[
+      'assets/haum1.png',
+      'assets/haum3.png',
+      'assets/haum2.png',
+    ],
+    detail: "과거와 현재의 명언을 통해, 엄섬된 좋은 글귀들을 마음이 편안해지는 감성적인 이미지와 매일 받아볼 수 있는 어플입니다.\n명언과 글귀를 통해 "
+        "하루에 격려와 위로의 배움을 얻을 수 있습니다.",
+    function: "글귀 저장, 글귀 보관함, 하움 알림, 위젯, 글귀 모음, 글귀 캘린더",
+    techStack: "Flutter, Firebase, Swift, Java",
+    endDate: "2024년 10월 운영 종료",
+    operatingResult: "여기에 운영성과를 입력해 주세요.", // 예: 다운로드 수, 사용자 수, 수상 내역 등
+  ),
 ];
 //프로젝트 상세 설명 및 이미지
 class ProjectItem extends GetView<ProjectController>{

@@ -9,20 +9,41 @@ import 'package:portfolio/pages/components/skill_section.dart';
 import 'package:portfolio/pages/components/career.dart';
 import 'package:portfolio/utils/constants.dart';
 import 'package:portfolio/utils/globals.dart';
+import 'package:portfolio/widgets/scroll_fade_wrapper.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  final ScrollController _scrollController = ScrollController();
+  final GlobalKey _scrollContentKey = GlobalKey();
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: Globals.scaffoldKey,
       endDrawer: Drawer(
         child: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 16.0,
-              vertical: 24.0,
-            ),
-            child: ListView.separated(
+          child: Material(
+            color: Colors.transparent,
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minWidth: 280.0),
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 16.0,
+                  vertical: 24.0,
+                ),
+                child: ListView.separated(
               itemBuilder: (BuildContext context, int index) {
                 return headerItems[index].isButton
                     ? MouseRegion(
@@ -61,6 +82,8 @@ class Home extends StatelessWidget {
                 );
               },
               itemCount: headerItems.length,
+                ),
+              ),
             ),
           ),
         ),
@@ -72,48 +95,43 @@ class Home extends StatelessWidget {
               child: Header(), //Header 구성, 상단 고정
             ),
             Expanded(
-              child: SingleChildScrollView( // 스크롤 가능 Part
+              child: SingleChildScrollView(
+                controller: _scrollController,
                 child: Column(
+                  key: _scrollContentKey,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Carousel(), // 소개글 회전,
-                    SizedBox(
-                      height: 75.0,
+                    ScrollFadeWrapper(
+                      scrollController: _scrollController,
+                      scrollContentKey: _scrollContentKey,
+                      child: Carousel(),
                     ),
-                    About(), // 나에 관한 소개
-                    SizedBox(
-                      height: 120.0,
+                    SizedBox(height: 75.0),
+                    About(
+                      scrollController: _scrollController,
+                      scrollContentKey: _scrollContentKey,
                     ),
-                    SkillSection(), //Skill 숙련도
-                    SizedBox(
-                      height: 10.0,
+                    SizedBox(height: 120.0),
+                    // ScrollFadeWrapper 제거: 스킬 바 애니메이션이 보이도록 항상 노출
+                    SkillSection(
+                      scrollController: _scrollController,
+                      scrollContentKey: _scrollContentKey,
                     ),
-                    EducationSection(), // Stack 별 나의 수준 소개.
-                    SizedBox(
-                      height: 75.0,
+                    SizedBox(height: 75.0),
+                    ScrollFadeWrapper(
+                      scrollController: _scrollController,
+                      scrollContentKey: _scrollContentKey,
+                      child: ProjectItem(),
                     ),
-                    ProjectItem(), // Project 소개
-                    SizedBox(
-                      height: 75.0,
+                    SizedBox(height: 75.0),
+                    Career(),
+                    SizedBox(height: 75.0),
+                    SizedBox(height: 50.0),
+                    ScrollFadeWrapper(
+                      scrollController: _scrollController,
+                      scrollContentKey: _scrollContentKey,
+                      child: Footer(),
                     ),
-                    Career(), // 이력
-                    // Padding(
-                    //   padding: const EdgeInsets.symmetric(vertical: 28.0),
-                    //   child: PortfolioStats(),
-                    // ),
-                    //CvSection(), //Main Skill 소개
-                    SizedBox(
-                      height: 75.0,
-                    ),
-                    SizedBox(
-                      height: 50.0,
-                    ),
-                    // Sponsors(),
-                    // SizedBox(
-                    //   height: 50.0,
-                    // ),
-                    // TestimonialWidget(),
-                    Footer(), // 하단 구성
                   ],
                 ),
               ),

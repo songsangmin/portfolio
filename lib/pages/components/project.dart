@@ -2,7 +2,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/models/project_model.dart';
 import 'package:portfolio/widgets/horizontal_divide.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../../widgets/image_with_animated_opacity.dart';
 
 // 프로젝트 전체
@@ -16,6 +15,7 @@ class Project extends StatelessWidget{
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
     return Card(
+      color: Colors.white,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
       child: Padding(
         padding: EdgeInsets.symmetric(
@@ -127,133 +127,140 @@ class ProjectDetail extends StatelessWidget{
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(project.detail, style: TextStyle(
-          fontFamily: "Jalnan",
-          fontSize: 22,
-          fontWeight: FontWeight.w400
-        ),),
-        HorizontalDivide(space: 30,color: Colors.black54,),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 5,
-              //vertical: 12,
-            ),
-            child: Icon(
-              Icons.circle,
-              size: 15,
-            ),
-          ),
-          Text('주요 기능:',style: TextStyle(
+        Text(
+          project.detail,
+          style: TextStyle(
             fontFamily: "Jalnan",
-            fontSize: 17.5,
-          ),),
-          SizedBox(width: 10,),
-          Expanded(
-              child: Text(project.function, style: TextStyle(
-                fontFamily: "Jalnan",
-                fontSize: 17.5,
-              ),)),
-        ],),
-        SizedBox(height: 10,),
+            fontSize: 22,
+            fontWeight: FontWeight.w400,
+            color: Colors.black,
+          ),
+        ),
+        HorizontalDivide(space: 30, color: Colors.black87),
         Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 5,
-                  //vertical: 12,
-                ),
-            child: Icon(
-              Icons.circle,
-              size: 15,
-            ),),
-            Text('기술 스택:', style: TextStyle(
-              fontFamily: "Jalnan",
-              fontSize: 17.5,
-            ),),
-            SizedBox(width: 10,),
-            Expanded(
-              child: Text(project.techStack, style: TextStyle(
-                fontFamily: "Museum",
-                fontWeight: FontWeight.bold,
+              padding: EdgeInsets.symmetric(horizontal: 5),
+              child: Icon(Icons.circle, size: 15, color: Colors.black87),
+            ),
+            Text(
+              '주요 기능:',
+              style: TextStyle(
+                fontFamily: "Jalnan",
                 fontSize: 17.5,
-              ),),
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
             ),
-            SizedBox(
-              height: 40,
-            )
+            SizedBox(width: 10),
+            Expanded(
+              child: Text(
+                project.function,
+                style: TextStyle(
+                  fontFamily: "Jalnan",
+                  fontSize: 17.5,
+                  color: Colors.grey,
+                ),
+              ),
+            ),
           ],
         ),
+        SizedBox(height: 10),
         Row(
-          children: [
-            MouseRegion(
-              cursor: SystemMouseCursors.click,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-                height: 48.0,
-                padding: EdgeInsets.symmetric(
-                  horizontal: 28.0,
-                ),
-                child: TextButton(
-                  onPressed: () async {
-                    final uri = Uri.parse("https://play.google.com/store/apps/details?id=com.ha.woom&hl=ko&gl=US");
-                    if (await canLaunchUrl(uri)) {
-                      await launchUrl(uri, mode: LaunchMode.externalApplication);
-                    }
-                  },
-                  child: Center(
-                    child: Text(
-                      "ANDROID APP",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 13.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 5),
+              child: Icon(Icons.circle, size: 15, color: Colors.black87),
+            ),
+            Text(
+              '기술 스택:',
+              style: TextStyle(
+                fontFamily: "Jalnan",
+                fontSize: 17.5,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+            SizedBox(width: 10),
+            Expanded(
+              child: Text(
+                project.techStack,
+                style: TextStyle(
+                  fontFamily: "Museum",
+                  fontWeight: FontWeight.bold,
+                  fontSize: 17.5,
+                  color: Colors.grey,
                 ),
               ),
             ),
-            SizedBox(width: 20,),
-            MouseRegion(
-              cursor: SystemMouseCursors.click,
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.0),
-                  border: Border.all(
-                    color: Colors.black,
-                  ),
-                ),
-                height: 48.0,
-                padding: EdgeInsets.symmetric(horizontal: 28.0),
-                child: TextButton(
-                  onPressed: () async {
-                    final uri = Uri.parse("https://apps.apple.com/kr/app/%ED%95%98%EC%9B%80/id1503624763");
-                    if (await canLaunchUrl(uri)) {
-                      await launchUrl(uri, mode: LaunchMode.externalApplication);
-                    }
-                  },
-                  child: Center(
-                    child: Text(
-                      "IOS APP",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 13.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            SizedBox(height: 10),
           ],
         ),
+        if (project.endDate.isNotEmpty) ...[
+          SizedBox(height: 8),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 5),
+                child: Icon(Icons.circle, size: 15, color: Colors.black87),
+              ),
+              Text(
+                '운영 종료:',
+                style: TextStyle(
+                  fontFamily: "Jalnan",
+                  fontSize: 17.5,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+              SizedBox(width: 10),
+              Text(
+                project.endDate,
+                style: TextStyle(
+                  fontFamily: "Jalnan",
+                  fontSize: 17.5,
+                  color: Colors.grey,
+                ),
+              ),
+            ],
+          ),
+        ],
+        if (project.operatingResult.isNotEmpty) ...[
+          SizedBox(height: 10),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 5),
+                child: Icon(Icons.circle, size: 15, color: Colors.black87),
+              ),
+              Text(
+                '운영성과:',
+                style: TextStyle(
+                  fontFamily: "Jalnan",
+                  fontSize: 17.5,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+              SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  project.operatingResult,
+                  style: TextStyle(
+                    fontFamily: "Jalnan",
+                    fontSize: 17.5,
+                    color: Colors.grey,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+        SizedBox(height: 24),
       ],
     );
   }

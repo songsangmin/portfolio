@@ -1,166 +1,211 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:portfolio/models/skill.dart';
 import 'package:portfolio/utils/constants.dart';
 import 'package:portfolio/utils/screen_helper.dart';
 import 'package:portfolio/utils/globals.dart';
 
-//todo 언제든지 실력이 늘면 바꿀 수 있도록
-List<Skill> skills = [
-  Skill(
-    skill: "Dart",
-    percentage: 85,
-  ),
-  Skill(
-    skill: "Java",
-    percentage: 60,
-  ),
-  Skill(
-    skill: "Swift",
-    percentage: 40,
-  ),
-  Skill(
-    skill: "MariaDB, MYSQL, MSSQL",
-    percentage: 85,
-  ),
-  Skill(
-    skill: "Firebase",
-    percentage: 70,
-  ),
-  Skill(
-    skill: "react-native",
-    percentage: 60,
-  ),
-  Skill(
-    skill: "PHP",
-    percentage: 55,
-  ),
-  Skill(
-    skill: "JAVASCRIPT",
-    percentage: 70,
-  )
+final List<Color> _pastelBarColors = [
+  Color(0xFFB5EAD7),
+  Color(0xFFC7CEEA),
+  Color(0xFFFFDAC1),
+  Color(0xFFFFF3B0),
+  Color(0xFFE2F0CB),
+  Color(0xFFD4A5A5),
+  Color(0xFFB8D4E3),
+  Color(0xFFF9C5D1),
+  Color(0xFFCFE1B9),
 ];
 
-class SkillSection extends StatelessWidget {
+List<Skill> skills = [
+  Skill(skill: "Dart", percentage: 85),
+  Skill(skill: "Java", percentage: 70),
+  Skill(skill: "Swift", percentage: 50),
+  Skill(skill: "MariaDB, MYSQL, MSSQL", percentage: 80),
+  Skill(skill: "Firebase", percentage: 80),
+  Skill(skill: "react-native", percentage: 80),
+  Skill(skill: "PHP", percentage: 70),
+  Skill(skill: "JAVASCRIPT", percentage: 70),
+  Skill(skill: "ASP Classic", percentage: 70),
+];
+
+class SkillSection extends StatefulWidget {
+  const SkillSection({
+    Key? key,
+    this.scrollController,
+    this.scrollContentKey,
+  }) : super(key: key);
+
+  final ScrollController? scrollController;
+  final GlobalKey? scrollContentKey;
+
+  @override
+  State<SkillSection> createState() => _SkillSectionState();
+}
+
+class _SkillSectionState extends State<SkillSection> {
+  double _animT = 0.0;
+  Timer? _timer;
+  static const _durationMs = 900;
+
+  @override
+  void initState() {
+    super.initState();
+    // 첫 프레임 후 약 400ms 지연 후 애니메이션 시작 (스크롤해서 도달했을 때 보이도록)
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Future.delayed(const Duration(milliseconds: 400), () {
+        if (!mounted) return;
+        final start = DateTime.now().millisecondsSinceEpoch;
+        _timer = Timer.periodic(const Duration(milliseconds: 16), (_) {
+          if (!mounted) return;
+          final elapsed = DateTime.now().millisecondsSinceEpoch - start;
+          final linearT = (elapsed / _durationMs).clamp(0.0, 1.0);
+          final t = Curves.easeOutCubic.transform(linearT);
+          if (linearT >= 1.0) {
+            _timer?.cancel();
+            _timer = null;
+          }
+          setState(() => _animT = t);
+        });
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       key: Globals.skillKey,
       child: ScreenHelper(
-        desktop: _buildUi(kDesktopMaxWidth),
-        tablet: _buildUi(kTabletMaxWidth),
-        mobile: _buildUi(getMobileMaxWidth(context)),
+        desktop: _buildUi(kDesktopMaxWidth, context),
+        tablet: _buildUi(kTabletMaxWidth, context),
+        mobile: _buildUi(getMobileMaxWidth(context), context),
       ),
     );
   }
 
-  Widget _buildUi(double width) {
+  Widget _buildUi(double width, BuildContext context) {
+    final isMobile = ScreenHelper.isMobile(context);
+    final sortedSkills = [...skills]..sort((a, b) => b.percentage.compareTo(a.percentage));
+    final safeWidth = width.clamp(1.0, double.infinity);
+    // 데스크톱/태블릿: Row에서 이미지(flex 2) + 간격 50 + 바(flex 4) → 바 영역 너비 ≈ (width - 50) * 4/6
+    final barColumnWidth = isMobile ? safeWidth : (safeWidth - 50) * (4 / 6);
+
     return Center(
-      child: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-          return ConstrainedBox(
-            constraints: BoxConstraints(
-              maxWidth: width,
-              minWidth: width,
-            ),
-            child: Flex(
-              direction: ScreenHelper.isMobile(context)
-                  ? Axis.vertical
-                  : Axis.horizontal,
+      child: ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: safeWidth),
+        child: isMobile
+            ? Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Image.asset("assets/skill.png", width: 300.0),
+                  SizedBox(height: 30.0),
+                  _buildBarsSection(sortedSkills, barColumnWidth),
+                ],
+              )
+            : Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: Image.asset("assets/skill.png", width: 300.0),
+                  ),
+                  SizedBox(width: 50.0),
+                  Expanded(
+                    flex: 4,
+                    child: _buildBarsSection(sortedSkills, barColumnWidth),
+                  ),
+                ],
+              ),
+      ),
+    );
+  }
+
+  Widget _buildBarsSection(List<Skill> sortedSkills, double columnWidth) {
+    const reserved = 90.0;
+    final barArea = (columnWidth - reserved).clamp(10.0, double.infinity);
+    return _buildBarsContent(sortedSkills, barArea, _animT);
+  }
+
+  Widget _buildBarsContent(List<Skill> sortedSkills, double barArea, double t) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          "SKILLS",
+          style: TextStyle(
+            fontFamily: "Museum",
+            color: Colors.black,
+            fontWeight: FontWeight.w900,
+            fontSize: 28.0,
+            height: 1.3,
+          ),
+        ),
+        SizedBox(height: 15.0),
+        ...sortedSkills.asMap().entries.map((entry) {
+          final i = entry.key;
+          final s = entry.value;
+          final color = _pastelBarColors[i % _pastelBarColors.length];
+          // 막대별로 딜레이를 주어 순차적으로 늘어나는 효과 (t: 0→1 구간에서 스태거)
+          const stagger = 0.04;
+          final growthSpan = (1.0 - (sortedSkills.length - 1) * stagger).clamp(0.05, 1.0);
+          final barT = ((t - i * stagger) / growthSpan).clamp(0.0, 1.0);
+          final w = barArea * (s.percentage / 100) * barT;
+          final emptyW = (barArea - w).clamp(0.0, double.infinity);
+          return Container(
+            margin: EdgeInsets.only(bottom: 15.0),
+            child: Row(
               children: [
-                Expanded(
-                  flex: ScreenHelper.isMobile(context) ? 0 : 2,
-                  child: Image.asset(
-                    "assets/skill.png",
-                    width: 300.0,
-                  ),
-                ),
                 SizedBox(
-                  width: 50.0,
-                ),
-                Expanded(
-                  flex: ScreenHelper.isMobile(context) ? 0 : 4,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "SKILLS",
-                        style: TextStyle(
-                          fontFamily: "Museum",
-                          color: Colors.black,
-                          fontWeight: FontWeight.w900,
-                          fontSize: 28.0,
-                          height: 1.3,
-                        ),
+                  width: w.clamp(0.0, double.infinity),
+                  child: Container(
+                    padding: EdgeInsets.only(left: 10.0),
+                    alignment: Alignment.centerLeft,
+                    height: 38.0,
+                    child: Text(
+                      s.skill,
+                      style: TextStyle(
+                        fontFamily: "Museum",
+                        color: Colors.black87,
+                        fontWeight: FontWeight.w600,
                       ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      Text(
-                        "제가 사용하고 사용할 수 있는 Skill들의 숙련도 입니다.",
-                        style: TextStyle(
-                          fontFamily: "Jalnan",
-                          color: kCaptionColor,
-                          height: 1.5,
-                          fontSize: 16.0,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 15.0,
-                      ),
-                      Column(
-                        children: skills
-                            .map(
-                              (skill) => Container(
-                            margin: EdgeInsets.only(bottom: 15.0),
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  flex: skill.percentage,
-                                  child: Container(
-                                    padding: EdgeInsets.only(left: 10.0),
-                                    alignment: Alignment.centerLeft,
-                                    height: 38.0,
-                                    child: Text(skill.skill,style: TextStyle(
-                                      fontFamily: "Museum",
-                                      color: Colors.white
-                                    ),),
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 10.0,
-                                ),
-                                Expanded(
-                                  // remaining (blank part)
-                                  flex: 100 - skill.percentage,
-                                  child: Divider(
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 10.0,
-                                ),
-                                Text(
-                                  "${skill.percentage}%",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16.0,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ).toList(),
-                      )
-                    ],
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    decoration: BoxDecoration(
+                      color: color,
+                      borderRadius: BorderRadius.horizontal(left: Radius.circular(4)),
+                    ),
                   ),
-                )
+                ),
+                SizedBox(width: 10.0),
+                SizedBox(
+                  width: emptyW.clamp(0.0, double.infinity),
+                  child: Divider(color: Colors.black12, thickness: 2),
+                ),
+                SizedBox(width: 10.0),
+                SizedBox(
+                  width: 44,
+                  child: Text(
+                    "${s.percentage}%",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    textAlign: TextAlign.right,
+                  ),
+                ),
               ],
             ),
           );
-        },
-      ),
+        }),
+      ],
     );
   }
 }

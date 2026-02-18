@@ -1,3 +1,4 @@
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/utils/constants.dart';
 import 'package:portfolio/utils/screen_helper.dart';
@@ -183,7 +184,10 @@ class Header extends StatelessWidget {
               HeaderLogo(),
               GestureDetector(
                 onTap: () {
-                  Globals.scaffoldKey.currentState?.openEndDrawer();
+                  // 한 프레임 뒤에 열어서 endDrawer가 layout 되기 전 hit test 오류 방지
+                  SchedulerBinding.instance.addPostFrameCallback((_) {
+                    Globals.scaffoldKey.currentState?.openEndDrawer();
+                  });
                 },
                 child: Icon(
                   Icons.import_contacts_sharp,

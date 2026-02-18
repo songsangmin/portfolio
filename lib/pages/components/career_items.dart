@@ -16,6 +16,50 @@ class CareerSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+          // 앱 이름·디테일이 있을 때만 표시 (career 섹션 기존 색/폰트와 동일)
+          if (app.name.isNotEmpty || app.detail.isNotEmpty) ...[
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.alphabetic,
+                children: [
+                  if (app.name.isNotEmpty)
+                    Text(
+                      app.name,
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontFamily: "Jalnan",
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                  if (app.name.isNotEmpty && app.detail.isNotEmpty)
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Text(
+                        '·',
+                        style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ),
+                  if (app.detail.isNotEmpty)
+                    Text(
+                      app.detail,
+                      style: const TextStyle(
+                        fontSize: 17,
+                        fontFamily: "Jalnan",
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey,
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          ],
           Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 10.0,
@@ -25,27 +69,27 @@ class CareerSection extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: List<Widget>.generate(
                 app.works.length,
-                    (int index) {
+                (int index) {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
-                          const Padding(
-                            padding: EdgeInsets.symmetric(
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
                               horizontal: 5,
-                             // vertical: 12,
                             ),
                             child: Icon(
                               Icons.circle,
                               size: 15,
+                              color: Colors.black87,
                             ),
                           ),
                           Flexible(
                             child: Text(
                               app.works[index],
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 20,
                                 fontFamily: "Jalnan",
                                 fontWeight: FontWeight.bold,
