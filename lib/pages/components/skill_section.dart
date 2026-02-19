@@ -47,33 +47,58 @@ class SkillSection extends StatefulWidget {
 class _SkillSectionState extends State<SkillSection> {
   double _animT = 0.0;
   Timer? _timer;
+  bool _started = false;
   static const _durationMs = 900;
+
+  void _startAnim() {
+    if (_started) return;
+    _started = true;
+
+    final start = DateTime.now().millisecondsSinceEpoch;
+    _timer = Timer.periodic(const Duration(milliseconds: 16), (_) {
+      if (!mounted) return;
+      final elapsed = DateTime.now().millisecondsSinceEpoch - start;
+      final linearT = (elapsed / _durationMs).clamp(0.0, 1.0);
+      final t = Curves.easeOutCubic.transform(linearT);
+      if (linearT >= 1.0) {
+        _timer?.cancel();
+        _timer = null;
+      }
+      setState(() => _animT = t);
+    });
+  }
+
+  void _maybeStartIfVisible() {
+    if (_started || !mounted) return;
+
+    final ctx = Globals.skillKey.currentContext;
+    if (ctx == null) return;
+
+    final renderObject = ctx.findRenderObject();
+    if (renderObject is! RenderBox || !renderObject.hasSize) return;
+
+    final pos = renderObject.localToGlobal(Offset.zero);
+    final size = renderObject.size;
+    final screenH = MediaQuery.of(context).size.height;
+
+    // 화면에 일정 부분이라도 보이면 애니메이션 시작
+    final visible = pos.dy < screenH * 0.9 && (pos.dy + size.height) > screenH * 0.1;
+    if (visible) _startAnim();
+  }
 
   @override
   void initState() {
     super.initState();
-    // 첫 프레임 후 약 400ms 지연 후 애니메이션 시작 (스크롤해서 도달했을 때 보이도록)
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Future.delayed(const Duration(milliseconds: 400), () {
-        if (!mounted) return;
-        final start = DateTime.now().millisecondsSinceEpoch;
-        _timer = Timer.periodic(const Duration(milliseconds: 16), (_) {
-          if (!mounted) return;
-          final elapsed = DateTime.now().millisecondsSinceEpoch - start;
-          final linearT = (elapsed / _durationMs).clamp(0.0, 1.0);
-          final t = Curves.easeOutCubic.transform(linearT);
-          if (linearT >= 1.0) {
-            _timer?.cancel();
-            _timer = null;
-          }
-          setState(() => _animT = t);
-        });
-      });
+      if (!mounted) return;
+      _maybeStartIfVisible();
+      widget.scrollController?.addListener(_maybeStartIfVisible);
     });
   }
 
   @override
   void dispose() {
+    widget.scrollController?.removeListener(_maybeStartIfVisible);
     _timer?.cancel();
     super.dispose();
   }
